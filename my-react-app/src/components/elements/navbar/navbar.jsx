@@ -25,7 +25,7 @@ const Navbar = (props) => {
         <div className="flex items-end">
           <Button
             type="button"
-            classname=" border-l-2  hover:bg-blue-600 hover:text-white transition-all duration-300"
+            classname=" bg-blue-600 text-white  hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] transition-all duration-300"
           >
             <Link to="/login">Masuk</Link>
           </Button>
