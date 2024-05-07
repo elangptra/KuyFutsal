@@ -25,7 +25,7 @@ const FormRegister = () => {
       />
       
 
-      <Button type="submit" classname="bg-black w-full">
+      <Button type="submit" classname="bg-black text-white w-full">
         Daftar
       </Button>
       
