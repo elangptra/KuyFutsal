@@ -8,14 +8,12 @@ const FormLogin = () => {
         type="text"
         placeholder="Username"
         name="username"
-        placeholder="Username"
       />
 
       <Input
         type="password"
         placeholder="Password"
         name="password"
-        placeholder="Password"
       />
       <div className="flex justify-between mb-4">
         <div className="flex items-center ">
