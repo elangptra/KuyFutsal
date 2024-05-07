@@ -8,20 +8,17 @@ const FormRegister = () => {
         type="text"
         placeholder="Username"
         name="username"
-        placeholder="Username"
       />
 
       <Input
         type="password"
         placeholder="Password"
         name="password"
-        placeholder="Password"
       />
       <Input
         type="password"
         placeholder="Konfirmasi Password"
         name="password"
-        placeholder="Konfirmasi Password"
       />
       
 
