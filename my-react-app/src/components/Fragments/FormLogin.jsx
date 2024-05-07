@@ -28,7 +28,7 @@ const FormLogin = () => {
         <a href="#">Lupa sandi?</a>
       </div>
 
-      <Button type="submit" classname="bg-black w-full">
+      <Button type="submit" classname="bg-black text-white w-full">
         Masuk
       </Button>
       

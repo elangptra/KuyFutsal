@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <footer className="text-center text-lg-start bg-white text-muted">
+      <footer className="text-center text-lg-start bg-[#0B0D2C] text-muted">
         <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-          <div className="lg:flex lg:justify-between lg:mx-10 lg:mt-[200px] md:flex md:justify-between sm:mt-[-200px] me-5  d-lg-block">
+          <div className="lg:flex lg:justify-between text-white lg:mx-10 lg:mt-[80px] md:flex md:justify-between sm:mt-[-200px] me-5 d-lg-block">
             <div className="sm:mb-10">
               <p>Company</p>
               <ul className="lg:mt-5 sm:mt-5">
@@ -34,7 +34,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="sm:ms-[70px]">
+            <div className="sm:ms-[20px]">
               <p className="sm:me-[70px]">Payment</p>
               <ul className="flex sm:m-10  lg:mt-5">
                 <li className="mr-3">
@@ -52,21 +52,25 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="lg:flex lg:justify-between mx-10 lg:mt-10 sm:mt-10">
+          <div className="lg:flex lg:justify-between mx-10 lg:mt-10 sm:mt-10 text-white">
             <div>
-              <p className="mb-2">(021) 366698 <br /> Kota Tangerang, Provinsi Banten</p>
+              <p className="mb-2">
+                (021) 366698 <br /> Kota Tangerang, Provinsi Banten
+              </p>
             </div>
-            <p className="mt-7 font-semibold">© Copyright  Svarakama 2024 | All Right Reserved</p>
+            <p className="mt-7 font-semibold">
+              © Copyright Svarakama 2024 | All Right Reserved
+            </p>
             <div>
               <ul className="flex lg:mt-5 sm:mt-5 sm:ms-[200px]">
                 <li className="mr-3">
-                  <img src="images/instagram.png" alt="" className="h-[30px]"/>
+                  <img src="images/instagram.png" alt="" className="h-[30px]" />
                 </li>
                 <li className="mr-3">
-                  <img src="images/tiktok.png" alt="" className="h-[30px]"/>
+                  <img src="images/tiktok.png" alt="" className="h-[30px]" />
                 </li>
                 <li className="mr-3">
-                  <img src="images/whatsapp.png" alt="" className="h-[30px]"/>
+                  <img src="images/whatsapp.png" alt="" className="h-[30px]" />
                 </li>
               </ul>
             </div>
