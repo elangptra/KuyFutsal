@@ -27,7 +27,7 @@ const ContactPage = ()=>{
             {/* Social Media Start */}
             <div className="container">
                 <div className="flex flex-col w-full px-2 py-5 mt-10 items-center justify-center">
-                    <h3 className="font-semibold text-base text-white text-center w-2/5">Terima kasih sudah mengunjungi website KuyFutsal. 
+                    <h3 className="font-semibold text-base text-white text-center w-2/3">Terima kasih sudah mengunjungi website KuyFutsal. 
                         Apakah Kamu memiliki pertanyaan seputar platform ChoiceSport? Sampaikan pertanyaan Anda di sini. 
                         Tim kami akan menghubungi Anda secepatnya
                     </h3>
