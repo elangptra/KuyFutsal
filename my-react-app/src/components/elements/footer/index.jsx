@@ -10,13 +10,13 @@ const Footer = () => {
               <p>Company</p>
               <ul className="lg:mt-5 sm:mt-5">
                 <li className="lg:mb-3 hover:underline hover:text-blue-600">
-                  <Link to="/#">Home</Link>
+                  <Link to="/Homepage">Home</Link>
                 </li>
                 <li className="lg:mb-3 hover:underline hover:text-blue-600">
-                  <Link to="/#">About</Link>
+                  <Link to="/About">About</Link>
                 </li>
                 <li className="hover:underline hover:text-blue-600">
-                  <Link to="/#">Contact</Link>
+                  <Link to="/Contact">Contact</Link>
                 </li>
               </ul>
             </div>
@@ -24,13 +24,13 @@ const Footer = () => {
               <p>Product</p>
               <ul className="lg:mt-5 sm:mt-5 ">
                 <li className="lg:mb-3 hover:underline hover:text-blue-600">
-                  <Link to="/#">Home</Link>
+                  <Link to="/Homepage">Home</Link>
                 </li>
                 <li className="lg:mb-3 hover:underline hover:text-blue-600">
-                  <Link to="/#">Sewa Lapangan</Link>
+                  <Link to="/SewaLapangan">Sewa Lapangan</Link>
                 </li>
                 <li className="lg:mb-3 hover:underline hover:text-blue-600">
-                  <Link to="/#">Venue</Link>
+                  <Link to="/About">About Us</Link>
                 </li>
               </ul>
             </div>
