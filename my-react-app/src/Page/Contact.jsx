@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ContactPage = ()=>{
 
     return (
-        <div className="mt-[-80px] bg-[#171830]">
+        <div className="md:mt-[-80px] top-0 bg-[#171830]">
             {/* Header Start */}
             <Navbar />
             {/* Header End */}
