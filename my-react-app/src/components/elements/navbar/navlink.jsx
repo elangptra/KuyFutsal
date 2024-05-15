@@ -56,6 +56,9 @@ const Navlink = () => {
                 </div>
             </div>
             <div className="md:hidden flex text-white justify-center items-center">
+                <div className="absolute top-[-83px] right-[220px]">
+                    <RiwayatPemesanan />
+                </div>
                 <Button
                     type="button"
                     classname=" bg-blue-600 mb-2 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] 
