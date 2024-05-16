@@ -42,7 +42,7 @@ const Navbar = () => {
                 Sewa Lapangan
               </li>
             </Link>
-            <Link to="/about">
+            <Link to="/contact">
               <li className="mr-5 text-white hover:p-1 hover:underline hover:rounded-xl transition-all duration-300">
                 About Us
               </li>

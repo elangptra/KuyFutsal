@@ -10,7 +10,7 @@ const SewaLapangan = () => {
       <Navbar />
       <Heading  />
       <DaftarLapangan />
-      <Footer />
+      <Footer  />
     </div>
   );
 };

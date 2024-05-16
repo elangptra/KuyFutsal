@@ -3,8 +3,9 @@ import Footer from "../components/elements/footer";
 import FormContact from "../components/Fragments/FormContact";
 import {
     faEnvelope,
-    faPhone
-} from "@fortawesome/free-solid-svg-icons";
+    faPhone,
+
+}from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ContactPage = ()=>{
@@ -44,7 +45,7 @@ const ContactPage = ()=>{
                         <div className="flex flex-col w-1/3 justify-center items-center text-center">
                             <a href="#" className="w-20 h-20 rounded-full flex justify-center items-center bg-blue-300">
                                 <div className=" w-[4rem] h-[4rem] flex justify-center items-center rounded-full border border-slate-800 text-slate-800 hover:text-white transition">
-                                <FontAwesomeIcon icon="fa-brands fa-instagram" className="size-10"/>
+                                <FontAwesomeIcon icon={faEnvelope} className="size-10"/>
                                 </div>
                             </a>
                             <h3 className="font-bold mt-2 text-white">Instagram</h3>
