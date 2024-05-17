@@ -8,7 +8,7 @@ const Button = (props) => {
   return (
     <>
       <button
-        className={`h-10 px-6 font-semibold rounded-md ${classname} `}
+        className={`md:h-10 h-8 md:px-6 px-4 font-semibold rounded-md ${classname} `}
         type={type}
         onClick={onClick}
       >

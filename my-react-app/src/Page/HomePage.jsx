@@ -44,7 +44,7 @@ const HomePage = (props) => {
   return (
     <>
       <Navbar />
-      <div className="mt-[-80px] bg-[#171830]">
+      <div className="md:mt-[-80px] top-0 bg-[#171830]">
         <div
           className="flex justify-between absolute md:bottom-0 sm:bottom-0 lg:left-10 md:left-10 sm:left-10 lg:right-0 md:right-0 sm:right-0 mx-5"
           style={{ zIndex: "1" }}

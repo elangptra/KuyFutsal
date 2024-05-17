@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ContactPage = ()=>{
 
     return (
-        <div className=" bg-[#171830]">
+        <div className="md:mt-[-80px] top-0 bg-[#171830]">
             {/* Header Start */}
             <Navbar />
             {/* Header End */}
@@ -19,7 +19,7 @@ const ContactPage = ()=>{
             {/* Mini Image Header Start */}
             <div className="w-full py-2">
                 <div className="flex flex-wrap relative items-center justify-center">
-                    <img src="images/Contact/contact-banner.png" alt="Mini-Contact-banner" />
+                    <img src="images/Contact/contact-banner.png" alt="Mini-Contact-banner" className="w-full top-0 -ml-2 object-cover"/>
                     <h1 className="text-3xl font-semibold absolute text-white">Pertanyaan Tentang KuyFutsal</h1>
                 </div>
             </div>
@@ -28,7 +28,7 @@ const ContactPage = ()=>{
             {/* Social Media Start */}
             <div className="container">
                 <div className="flex flex-col w-full px-2 py-5 mt-10 items-center justify-center">
-                    <h3 className="font-semibold text-base text-white text-center w-2/5">Terima kasih sudah mengunjungi website KuyFutsal. 
+                    <h3 className="font-semibold text-base text-white text-center w-2/3">Terima kasih sudah mengunjungi website KuyFutsal. 
                         Apakah Kamu memiliki pertanyaan seputar platform ChoiceSport? Sampaikan pertanyaan Anda di sini. 
                         Tim kami akan menghubungi Anda secepatnya
                     </h3>
@@ -45,7 +45,7 @@ const ContactPage = ()=>{
                         <div className="flex flex-col w-1/3 justify-center items-center text-center">
                             <a href="#" className="w-20 h-20 rounded-full flex justify-center items-center bg-blue-300">
                                 <div className=" w-[4rem] h-[4rem] flex justify-center items-center rounded-full border border-slate-800 text-slate-800 hover:text-white transition">
-                                <FontAwesomeIcon icon={faEnvelope} className="size-10"/>
+                                <img src="images/icons/instagram.png" alt="Icon-Instagram" className="size-10" />
                                 </div>
                             </a>
                             <h3 className="font-bold mt-2 text-white">Instagram</h3>
