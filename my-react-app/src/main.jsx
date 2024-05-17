@@ -7,7 +7,6 @@ import RegisterPage from './Page/Register.jsx'
 import HomePage from './Page/HomePage.jsx'
 import Contact from './Page/Contact.jsx'
 import  AboutPage  from "./Page/About.jsx";
-import  SewaLapangan  from "./Page/SewaLapangan.jsx";
 import './index.css'
 import SewaLapangan from "./Page/SewaLapangan.jsx";
 
@@ -32,9 +31,10 @@ const router = createBrowserRouter([
     path: "/About",
     element: <AboutPage />,
   },
+  {
     path: "/SewaLapangan",
     element: <SewaLapangan />,
-  }
+  },
 ])
 
 

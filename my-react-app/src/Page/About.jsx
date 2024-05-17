@@ -51,7 +51,7 @@ const AboutPage = () => {
             Mengapa Memilih Kami?
           </h1>
           <div className="flex flex-wrap w-full justify-center items-center mt-10">
-            <div className="flex flex-col items-center justify-center py-5 px-10 rounded border bg-[#1F1F1F]">
+            <div className="flex-1 flex flex-col items-center justify-center py-5 px-10 rounded border bg-[#1F1F1F] m-2">
               <div className="w-[4rem] h-[4rem] rounded-full flex justify-center items-center mt-5 bg-blue-300 hover:text-white transition">
                 <FontAwesomeIcon icon={faGlobe} className="size-10" />
               </div>
@@ -59,7 +59,7 @@ const AboutPage = () => {
                 Web Olahraga Terbaik di <br /> Kota Tangerang
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center py-5 px-10 rounded border mx-5 bg-[#1F1F1F]">
+            <div className="flex-1 flex flex-col items-center justify-center py-5 px-10 rounded border bg-[#1F1F1F] m-2">
               <div className="w-[4rem] h-[4rem] rounded-full flex justify-center items-center mt-5 bg-blue-300 hover:text-white transition">
                 <FontAwesomeIcon
                   icon={faLocationCrosshairs}
@@ -71,7 +71,7 @@ const AboutPage = () => {
                 Lapangan Futsal
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center py-5 px-10 rounded border bg-[#1F1F1F]">
+            <div className="flex-1 flex flex-col items-center justify-center py-5 px-10 rounded border bg-[#1F1F1F] m-2">
               <div className="w-[4rem] h-[4rem] rounded-full flex justify-center items-center mt-5 bg-blue-300 hover:text-white transition">
                 <FontAwesomeIcon icon={faCheck} className="size-10" />
               </div>
