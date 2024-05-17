@@ -3,8 +3,9 @@ import Footer from "../components/elements/footer";
 import FormContact from "../components/Fragments/FormContact";
 import {
     faEnvelope,
-    faPhone
-} from "@fortawesome/free-solid-svg-icons";
+    faPhone,
+
+}from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ContactPage = ()=>{

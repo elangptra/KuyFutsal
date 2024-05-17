@@ -1,0 +1,902 @@
+{
+    "kecamatan": [
+        {
+            "id": 1,
+            "nama": "Batuceper",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "garuda futsal center",
+                    "image": "images/kecamatan/Batuceper/GarudaFutsalCenter.png",
+                    "harga": 100000,
+                    "rating": 4,
+                    "alamat": "Jl. Garuda No.66B, RT.006/RW.004, Batuceper, Kec. Batuceper, Kota Tangerang, Banten",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "Poris Futsal",
+                    "image": "images/kecamatan/Batuceper/Poris Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "RMGH+M82, Jl. Maulana Hasanudin, RT.007/RW.005, Poris Jaya, Kec. Batuceper, Kota Tangerang, Banten 15122",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "Futsal simprug",
+                    "image": "images/kecamatan/Batuceper/Futsal Simprug.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Kenari Raya Blk. G No.1 Blok G1, RT.003/RW.013, Poris Jaya, Kec. Batuceper, Kota Tangerang, Banten 15122",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "Futsal aditia pandanu",
+                    "image": "images/kecamatan/Batuceper/Futsal Aditia Pandanu.png",
+                    "harga": 100000,
+                    "rating": 4,
+                    "alamat": "belakang kasimura, Jl. Mandor Muhi Kampung Bulak Sembolo, RT.001/RW.010, Cipondoh Indah, Kec. Tangerang, Kota Tangerang, Banten 15148",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "Saujana Futsal",
+                    "image": "images/kecamatan/Batuceper/Saujana Futsal.png",
+                    "harga": 100000,
+                    "rating": 4,
+                    "alamat": "RT.003/RW.001, Poris Plawad Utara, Kec. Cipondoh, Kota Tangerang, Banten 15141",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 6,
+                    "nama": "KAO Futsal",
+                    "image": "images/kecamatan/Batuceper/KAO Futsal.png",
+                    "harga": 100000,
+                    "rating": 4,
+                    "alamat": "Jl. Sawah Darat, RT.001/RW.006, Ketapang, Kec. Cipondoh, Kota Tangerang, Banten 15148",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 7,
+                    "nama": "Futsal Puri Dewata Indah",
+                    "image": "images/kecamatan/Batuceper/Futsal Puri Dewata Indah.png",
+                    "harga": 100000,
+                    "rating": 4,
+                    "alamat": "Poris Plawad Utara, Kec. Cipondoh, Kota Tangerang, Banten",
+                    "jam_buka": "08:30",
+                    "jam_tutup": "22:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 8,
+                    "nama": "Cipta Panorama Futsal",
+                    "image": "images/kecamatan/Batuceper/Cipta Panorama Futsal.png",
+                    "harga": 100000,
+                    "rating": 4,
+                    "alamat": "Jl. H. Risan No.31, RT.005/RW.010, Cipondoh Makmur, Kec. Cipondoh, Kota Tangerang, Banten 15148",
+                    "jam_buka": "10:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                    
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "nama": "Cibodas",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "lapangan kacer",
+                    "image": "images/kecamatan/Cibodas/Lapangan Kacer.png",
+                    "harga": 50000,
+                    "rating": 5,
+                    "alamat": "QJQ7+28X, Jl. Kakatua IV, RT.006/RW.012, Cibodasari, Kec. Cibodas, Kota Tangerang, Banten 15138",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "Lapangan futsal rw 03",
+                    "image": "images/kecamatan/Cibodas/RW 03.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Subali No.5 5, RT.004/RW.003, Cibodas Baru, Cibodas, Tangerang City, Banten 15138",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "Lapangan futsal rudal",
+                    "image": "images/kecamatan/Cibodas/Futsal Rudal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Rusa II No.21, RT.004/RW.009, Cibodas Baru, Kec. Cibodas, Kota Tangerang, Banten 15138",
+                    "jam_buka": "20:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "Lapangan Futsal rw 07 cibodas",
+                    "image": "images/kecamatan/Cibodas/RW 07 Cibodas.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Sugriwa No.Raya, RT.001/RW.007, Cibodas Baru, Kec. Cibodas, Kota Tangerang, Banten 15138",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "Jala futsal",
+                    "image": "images/kecamatan/Cibodas/Jala Futsal.png",
+                    "harga": 50000,
+                    "rating": 5,
+                    "alamat": "Jl. Dipati Unus No.69, RT.001/RW.003, Cibodas, Kec. Cibodas, Kota Tangerang, Banten 15138",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 6,
+                    "nama": "Bawor arena",
+                    "image": "images/kecamatan/Cibodas/Bawor Arena.png",
+                    "harga": 50000,
+                    "rating": 5,
+                    "alamat": "QJQ4+6C5, RT.004/RW.023, Cibodasari, Kec. Cibodas, Kota Tangerang, Banten 15138",
+                    "jam_buka": "08:30",
+                    "jam_tutup": "22:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 7,
+                    "nama": "Futsal 71",
+                    "image": "images/kecamatan/Cibodas/Futsal 71.png",
+                    "harga": 50000,
+                    "rating": 5,
+                    "alamat": "Nomor 60 Kelurahan Margasari, Jl. Aria Santika No.15113, RT.005/RW.011, Bugel, Kec. Karawaci, Kota Tangerang, Banten 15113",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "nama": "Ciledug",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "Mat futsal",
+                    "image": "images/kecamatan/Ciledug/Mat Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Dr. Wahidin Sudiro Husodo, RT.001/RW.004, Paninggilan Utara, Kec. Ciledug, Kota Tangerang, Banten 15153",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "futsal lancong",
+                    "image": "images/kecamatan/Ciledug/Futsal Lancong.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Blok Lanlong.31, Jl. Sunan Gn. Jati No.RT 003, RT.003/RW.008, Paninggilan, Kec. Ciledug, Kota Tangerang, Banten 15153",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "premier futsal",
+                    "image": "images/kecamatan/Ciledug/Premier Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Ciledug Raya No.19, RT.001/RW.004, Larangan Utara, Kec. Larangan, Kota Tangerang, Banten 12260",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "zidane futsal",
+                    "image": "images/kecamatan/Ciledug/Zidane Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Sukarela No.3, RT.02/RW.005, Paninggilan, Kec. Ciledug, Kota Tangerang, Banten 15153",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "putra jaya futsal",
+                    "image": "images/kecamatan/Ciledug/Putra Jaya Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Sektor 13 No.11, RT.006/RW.009, Sudimara Jaya, Kec. Ciledug, Kota Tangerang, Banten 15151",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 6,
+                    "nama": "gurita futsal",
+                    "image": "images/kecamatan/Ciledug/Gurita Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "No, Jl. Karyawan II No.58, RT.004/RW.005, Karang Tengah, Kec. Karang Tengah, Kota Tangerang, Banten 15157",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 7,
+                    "nama": "Lapangan rk futsal",
+                    "image": "images/kecamatan/Ciledug/RK Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Pd. Kacang No.32, Pd. Kacang Tim., Kec. Pd. Aren, Kota Tangerang Selatan, Banten 15226",
+                    "jam_buka": "06:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "nama": "Cipondoh",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "cipondoh futsal",
+                    "image": "images/kecamatan/Cipondoh/Cipondoh Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Bangun Nusantara, Jl. Ketapang Thamrin No.RT. 01/05, RT.001/RW.006, Ketapang, Kec. Cipondoh, Kota Tangerang, Banten 15148",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "mega futsal",
+                    "image": "images/kecamatan/Cipondoh/Mega Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jalan Irigasi Sipon RT.03 / RW.03, Kenanga, Cipondoh, RT.003/RW.003, Kenanga, Kec. Tangerang, Kota Tangerang, Banten 15122",
+                    "jam_buka": "08:30",
+                    "jam_tutup": "23:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "Dan&dan futsal",
+                    "image": "images/kecamatan/Cipondoh/Dan Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "RM7J+W7H, RT.002/RW.003, Cipondoh, Kec. Cipondoh, Kota Tangerang, Banten 15148",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "rewa futsal club",
+                    "image": "images/kecamatan/Cipondoh/Rewa Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Kode Pos:, Jl. Irigasi Sipon D. Perapatan Royal No.61, RT.004/RW.002, Poris Plawad Utara, Kec. Cipondoh, Kota Tangerang, Banten 15141",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "ridho futsal",
+                    "image": "images/kecamatan/Cipondoh/Ridho Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. H. Oget, RT.001/RW.007, Ketapang, Kec. Cipondoh, Kota Tangerang, Banten 15147",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 6,
+                    "nama": "saujana futsal",
+                    "image": "images/kecamatan/Cipondoh/Saujana Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "RT.003/RW.001, Poris Plawad Utara, Kec. Cipondoh, Kota Tangerang, Banten 15141",
+                    "jam_buka": "07:30",
+                    "jam_tutup": "23:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 7,
+                    "nama": "Leo futsal",
+                    "image": "images/kecamatan/Cipondoh/Leo Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Irigasi, RT.002/RW.004, Kenanga, Kec. Cipondoh, Kota Tangerang, Banten 15146",
+                    "jam_buka": "06:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "nama": "Jatiuwung",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "Rakyat futsal",
+                    "image": "images/kecamatan/Jatiuwung/Rakyat Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. kp. keroncong, rt.001/rw.003, keroncong, kec.jatiuwung, kota tanggerang, banten 15134",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "Lapangan Futsal Gajah Tunggal",
+                    "image": "images/kecamatan/Jatiuwung/Gajah Tunggal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "jl.gajah tunggal no.22, rt.002/rw.001, pasir jaya, kec.jatiuwung, kota tanggerang, banten 15133",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "21:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "Gor roda prima fluent",
+                    "image": "images/kecamatan/Jatiuwung/GOR Roda Prima.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. gatot subroto, jatiuwung,cibodas,rt.002/rw.003, jatiuwung,kec.cibodas, kota tanggerang, banten 15137",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "Futsal perintis",
+                    "image": "images/kecamatan/Jatiuwung/Futsal Perintis.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. pasir randu no.28, rt.008/rw.002, kadu,kec.curug, kabupaten tanggerang, banten 15810",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "centro futsal court",
+                    "image": "images/kecamatan/Jatiuwung/Centro Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. raya plp curung km 1 rt.19/rw.04 pos bitung curug kadu, kabupaten tanggerang, banten 15810",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "nama": "Karang Tengah",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "futsal square",
+                    "image": "images/kecamatan/Karang Tengah/Futsal Square.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Barata Jaya No.98, RT.001/RW.010, Karang Tengah, Kec. Karang Tengah, Kota Tangerang, Banten 15157",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "vini vidi vici",
+                    "image": "images/kecamatan/Karang Tengah/Vini Vidi Vici.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Raden Saleh No.9, RT.002/RW.014, Karang Tengah, Kec. Karang Tengah, Kota Tangerang, Banten 15157",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "Gurita futsal",
+                    "image": "images/kecamatan/Karang Tengah/Gurita Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "No, Jl. Karyawan II No.58, RT.004/RW.005, Karang Tengah, Kec. Karang Tengah, Kota Tangerang, Banten 15157",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "v3 futsal",
+                    "image": "images/kecamatan/Karang Tengah/V3 Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Raden Saleh No.31, RT.002/RW.014, Karang Tengah, Tangerang, Kota Tangerang, Banten 15157",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "kartini futsal",
+                    "image": "images/kecamatan/Karang Tengah/Kartini Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Kartini Futsal (Wana Kerta), Wana Kerta, Kec. Sindang Jaya, Kabupaten Tangerang, Banten 15560",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "23:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 6,
+                    "nama": "enggal unggul futsal",
+                    "image": "images/kecamatan/Karang Tengah/Unggul Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "R92V+589 kode pos, gang tegal Jl. Desa Pangkat, Pabuaran, Kec. Jayanti, Kabupaten Tangerang, Banten 15610",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 7,
+                    "nama": "futsal persada",
+                    "image": "images/kecamatan/Karang Tengah/Futsal Persada.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. Raya Ps. Kemis Blok Haji Tosin No.11, RT.2/RW.4, Sukamantri, Kec. Ps. Kemis, Kabupaten Tangerang, Banten 15560",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 8,
+                    "nama": "lapangan futsal garuda 99",
+                    "image": "images/kecamatan/Karang Tengah/Futsal Garuda.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. H. Asari No.42, RT.002/RW.001, Pd. Pucung, Kec. Karang Tengah, Kota Tangerang, Banten 15157",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "nama": "karawaci",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "karawaci futsal center",
+                    "image": "images/kecamatan/Karawaci/Karawaci Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. imam bonjol km.2,58 no.20, rt.003/rw.001, bojong jaya, karawaci, tanggerang city, banten 15115",
+                    "jam_buka": "06:00",
+                    "jam_tutup": "23:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "rajawali futsal",
+                    "image": "images/kecamatan/Karawaci/Rajawali Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "gg.beringin no.47, rt.001/rw.001, pabuaran, kec.karawaci, kota tanggerang, banten  15114",
+                    "jam_buka": "07:30",
+                    "jam_tutup": "23:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "welco futsal",
+                    "image": "images/kecamatan/Karawaci/Welco Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "jl. pabuaran indah no.4, rt.003/rw.002, pabuaran, kec. karawaci, kota tanggerang, banten 15114",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "23:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "lapangan futsal minim",
+                    "image": "images/kecamatan/Karawaci/Futsal Minim.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. kelapa 1, rt.005/rw.005, cibodasari, kota tanggerang, banten 15138",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "futsal 71",
+                    "image": "images/kecamatan/Karawaci/Futsal 71.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "No.60 kelurahan margasari, jl.aria santika no.15113, rt.005/rw.011, bugel, kec. karawaci, kota tanggerang, banten 15113",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 6,
+                    "nama": "futsal raihan",
+                    "image": "images/kecamatan/Karawaci/Futsal Raihan.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "no., jl. kelapa dua raya no.93,klp. dua, kec.klp. dua, kabupaten tanggerang, banten 15810",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "nama": "larangan",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "Reva futsal",
+                    "image": "images/kecamatan/Larangan/Reva Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. hos cokroaminoto jl. buntu larangan no.10,rt.001/rw009, larangan indah, kec. larangan, kota tanggerang, banten 15154",
+                    "jam_buka": "09:00",
+                    "jam_tutup": "02:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "nakata futsal",
+                    "image": "images/kecamatan/Larangan/Nakata Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "jl.ciledug raya no.8, rt.001/rw.1, kreo selatan, kec. larangan, kota tanggerang, banten 15156",
+                    "jam_buka": "06:00",
+                    "jam_tutup": "02:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "firdha futsal",
+                    "image": "images/kecamatan/Larangan/Firdha Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. al barokah, rt.002/rw.008, kreo selatan, kec.larangan, kota tanggerang, banten 15156",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "harvatska futsal academy",
+                    "image": "images/kecamatan/Larangan/Futsal Academy.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. shinta, rt.001/rw.003, larangan utara, kec. larangan, kota tanggerang, banten 15154",
+                    "jam_buka": "09:00",
+                    "jam_tutup": "17:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "eaganta futsal",
+                    "image": "images/kecamatan/Larangan/Eaganta Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. pesantren no.43, jurang manggu barat, pondok aren, jurang manggu tim, kec.pd.aren, kota tanggerang selatan, banten 15223",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "nama": "Neglasari",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "soccer park kedaung futsal",
+                    "image": "images/kecamatan/Neglasari/Soccer Park.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. amd manunggal x, rt.007/rw.004, kedaung wetan, kec. neglasari, kota tanggerang, banten 15128",
+                    "jam_buka": "09:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "kedaung indah futsal",
+                    "image": "images/kecamatan/Neglasari/Kedawung Indah.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "vj8f+f96, rt.007/rw.004, kedaung wetan, kec. neglasari, kota tanggerang, banten 15128",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "21:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "bim futsal",
+                    "image": "images/kecamatan/Neglasari/Bim Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. marsekal surya darma komplex satrudal tni au tegalsari, rt.001/rw.006, karang sari, kec. neglasari, kota tanggerang, banten 15127",
+                    "jam_buka": "09:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "cahaya futsal",
+                    "image": "images/kecamatan/Neglasari/Cahaya Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. raya kedaung barat no.rt.01/rw.02, pasar sore, kedaung bar., kec. sepatan tim., kabupaten tanggerang, banten 15520",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "01:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "tena futsal",
+                    "image": "images/kecamatan/Neglasari/Tena Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. raya kampung melayu no.16, teluknaga, kec. teluknaga, kabupaten tanggerang, banten 15510",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "22:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 6,
+                    "nama": "milli futsal",
+                    "image": "images/kecamatan/Neglasari/Milli Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "vj29+h6w, rt.001/rw.001, mekarsari, kec. neglasari, kota tanggerang, banten 15129",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "nama": "Periuk",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "lapangan futsal periuk jaya",
+                    "image": "images/kecamatan/Periuk/Periuk Jaya.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "rjm3+w6m, rt.005/rw.005, periuk jaya, kec.periuk, kota tanggerang, banten 15131",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "damai futsal",
+                    "image": "images/kecamatan/Periuk/Damai Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "jl.maulana hasanudin no.20, rt.002/rw.011, cipondoh makmur, kec.cipondoh, kota tanggerang, banten 15148",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "lapangan futsal griya merpati mas",
+                    "image": "images/kecamatan/Periuk/Griya Merpati.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. merpati v no.38, rt.002/rw.005, gembor, kec. periuk, kota tanggerang, banten 15133",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "benteng futsal",
+                    "image": "images/kecamatan/Periuk/Benteng Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "gembor, kec. periuk, kota tanggerang, banten",
+                    "jam_buka": "00:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "perintis futsal (d’cozy)",
+                    "image": "images/kecamatan/Periuk/Perintis Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "smks smea perintis 1 sepatan, karet, kec. sepatan, kabupaten tanggerang, banten 15520",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:30",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 6,
+                    "nama": "green apple futsal",
+                    "image": "images/kecamatan/Periuk/Green Apple Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "jl. raya regency ii no.1, kuta jaya, kec. ps. kemis, kabupaten tanggerang, banten 15560",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "03:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 7,
+                    "nama": "cahaya futsal periuk tanggerang",
+                    "image": "images/kecamatan/Periuk/Cahaya Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "villa tanggerang regency 1, jl. anggrek no.02, rt.007/rw.007, gebang raya, kec.periuk, kota tanggerang, banten 15132",
+                    "jam_buka": "06:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "nama": "Pinang",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "blafut futsal",
+                    "image": "images/kecamatan/Pinang/Blafut Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl.pepabri raya rt.03/rw.02 kelurahan kunciran induk kecamatan pinang, rt.003/rw.012, kunciran, kec.tanggerang, kota tanggerang, bantem 15144 ",
+                    "jam_buka": "10:00",
+                    "jam_tutup": "03:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "blafut futsal 3",
+                    "image": "images/kecamatan/Pinang/Blafut Futsal 3.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "jl. gempol no. raya, rt.006/rw.009, kunciran, kec.pinang, kota tanggerang, banten 15144",
+                    "jam_buka": "buka 24 jam",
+                    "jam_tutup": "buka 24 jam",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "dk futsal",
+                    "image": "images/kecamatan/Pinang/DK Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. ki male no.32, rt.001/rw.004, panunggangan tim., kec. pinang, kota tanggerang, banten 15143",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:59",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "rajawali futsal",
+                    "image": "images/kecamatan/Pinang/Rajawali Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl.kh. hasyim ashari, sudirman pinang, tanggerang, rt.008/rw.003, sudirman pinang, kec.pinang, kota tanggerang, banten 15145 ",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "01:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 5,
+                    "nama": "champion futsal",
+                    "image": "images/kecamatan/Pinang/Champion Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl. nn no.65,curug sangereng, kec,klp.dua, kabupaten tanggerang, banten 15810",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "21:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "nama": "Tanggerang",
+            "tempat_futsal": [
+                {
+                    "id": 1,
+                    "nama": "lapangan pandawa futsal indonesia",
+                    "image": "images/kecamatan/Tanggerang/Pandawa Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "rt.006/rw.005, buaran indah, kec. tanggerang, kota tanggerang, banten 15119 ",
+                    "jam_buka": "buka 24 jam",
+                    "jam_tutup": "buka 24 jam",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 2,
+                    "nama": "lapangan futsal cikokol",
+                    "image": "images/kecamatan/Tanggerang/Futsal Cikokol.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "jl. perintis kemerdekaan no.38, rt.001/rw.001, babakan, kec. tanggerang, banten 15118 ",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "00:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 3,
+                    "nama": "futsal modern golf & country club",
+                    "image": "images/kecamatan/Tanggerang/Futsal Modern.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "Jl.modern golf raya, rt.001/rw.008,klp.indah, kec.tanggerang, kota tanggerang, banten 15117 ",
+                    "jam_buka": "07:00",
+                    "jam_tutup": "23:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                },
+                {
+                    "id": 4,
+                    "nama": "the adamyati futsal",
+                    "image": "images/kecamatan/Tanggerang/Adamyati Futsal.png",
+                    "harga": 50000,
+                    "rating": 4,
+                    "alamat": "no. jl. a. damyati no.23, rt.006/rw.003, sukarasa, kec.tanggerang, kota tanggerang, banten 15111",
+                    "jam_buka": "08:00",
+                    "jam_tutup": "20:00",
+                    "note": "Tidak boleh membawa makanan atau minuman dari luar"
+                }
+            ]
+        }
+    ]
+}
