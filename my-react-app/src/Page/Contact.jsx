@@ -3,6 +3,7 @@ import Footer from "../components/elements/footer";
 import FormContact from "../components/Fragments/FormContact";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {Instagram} from "lucide-react";
 
 const ContactPage = () => {
   return (
@@ -29,12 +30,12 @@ const ContactPage = () => {
       {/* Social Media Start */}
       <div className="container">
         <div className="flex flex-col w-full px-2 py-5 mt-10 items-center justify-center">
-          <h3 className="font-semibold text-base text-white text-center w-2/3">
+          <h3 className="font-semibold text-base text-white text-center">
             Terima kasih sudah mengunjungi website KuyFutsal. Apakah Kamu
             memiliki pertanyaan seputar platform ChoiceSport? Sampaikan
             pertanyaan Anda di sini. Tim kami akan menghubungi Anda secepatnya
           </h3>
-          <div className="flex lg:w-2/5 md:w-1/3 px-2 py-10 justify-between items-center">
+          <div className="flex lg:w-full px-96 py-10 justify-between items-center">
             <div className="flex-1 flex flex-col justify-center items-center text-center mx-2">
               <a
                 href="#"
@@ -55,11 +56,7 @@ const ContactPage = () => {
                 className="w-20 h-20 rounded-full flex justify-center items-center bg-blue-300"
               >
                 <div className="w-[4rem] h-[4rem] flex justify-center items-center rounded-full border border-slate-800 text-slate-800 hover:text-white transition">
-                  <img
-                    src="images/icons/instagram.png"
-                    alt="Icon-Instagram"
-                    className="size-10"
-                  />
+                <Instagram className="size-10"/>
                 </div>
               </a>
               <h3 className="font-bold mt-2 text-white">Instagram</h3>
