@@ -35,7 +35,7 @@ const ContactPage = () => {
             memiliki pertanyaan seputar platform ChoiceSport? Sampaikan
             pertanyaan Anda di sini. Tim kami akan menghubungi Anda secepatnya
           </h3>
-          <div className="flex lg:w-full px-96 py-10 justify-between items-center">
+          <div className="flex lg:w-full px-72 py-10 justify-between items-center">
             <div className="flex-1 flex flex-col justify-center items-center text-center mx-2">
               <a
                 href="#"
