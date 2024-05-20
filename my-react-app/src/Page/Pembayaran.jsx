@@ -3,20 +3,32 @@ import Navbar from "../components/elements/navbar/navbar";
 import Footer from "../components/elements/footer";
 import Button from "../components/elements/button/index";
 import ModalReschedule from "../components/elements/ModalReschedule";
+import ModalPembayaran from "../components/elements/ModalPembayaran";
 import {ArrowLeft, ChevronRight} from "lucide-react";
 import { useState } from 'react';
 
 
 const Pembayaran = () => {
-    const [isModalVisible, setModalVisible] = useState(false);
+    const [isModalRescheduleVisible, setModalRescheduleVisible] = useState(false);
 
-    const openModal = (event) => {
+    const [isModalPembayaranVisible, setModalPembayaranVisible] = useState(false);
+
+    const openModalReschedule = (event) => {
         event.preventDefault();
-        setModalVisible(true);
+        setModalRescheduleVisible(true);
     };
 
-    const closeModal = () => {
-        setModalVisible(false);
+    const closeModalReschedule = () => {
+        setModalRescheduleVisible(false);
+    };
+
+    const openModalPembayaran = (event) => {
+        event.preventDefault();
+        setModalPembayaranVisible(true);
+    };
+
+    const closeModalPembayaran = () => {
+        setModalPembayaranVisible(false);
     };
 
   return (
@@ -27,8 +39,8 @@ const Pembayaran = () => {
 
     {/* Body Start */}
     <div className="container">
-        <div className="flex flex-wrap items-start py-24">
-            <div className="w-8/12 bg-white rounded-lg p-5 mx-3">
+        <div className="flex flex-wrap justify-between items-start py-24">
+            <div className="w-8/12 bg-white rounded-lg p-5">
                 <div>
                     <h3 className="font-semibold text-2xl m-2">Nama Lapangan</h3>
                     <p className="text-base m-2"><span>⭐</span> rating • Kota Tangerang</p>
@@ -51,7 +63,7 @@ const Pembayaran = () => {
                     </a>
                 </div>
             </div>
-            <div className="w-3/12 mx-3">
+            <div className="w-[32%]">
                 <div className="bg-white rounded-lg p-4">
                     <div>
                         <h3 className="font-semibold text-2xl m-2">Rincian Biaya</h3>
@@ -75,17 +87,18 @@ const Pembayaran = () => {
                         </div>
                     </div>
                 </div>
-                <a href="#" onClick={openModal}>
+                <a href="#" onClick={openModalReschedule}>
                     <div className="flex flex-wrap justify-between bg-white rounded-lg p-4 my-5">
                         <h5 className="text-base">Detail Reschedule & Pembatalan</h5>
                         <ChevronRight />
                     </div>
                 </a>
-                <ModalReschedule isVisible={isModalVisible} onClose={closeModal} />
+                <ModalReschedule isVisible={isModalRescheduleVisible} onClose={closeModalReschedule} />
                 <div className="w-full">
-                    <Button type="submit" classname="w-full text-base font-normal text-white bg-blue-500">
+                    <Button onClick={openModalPembayaran} classname="w-full text-base font-normal text-white bg-blue-500">
                         Lanjutkan Ke Pembayaran
                     </Button>
+                    <ModalPembayaran isVisible={isModalPembayaranVisible} onClose={closeModalPembayaran} />
                 </div>
             </div>
         </div>

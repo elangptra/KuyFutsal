@@ -22,7 +22,6 @@ const Navbar = () => {
     <>
     <header className={`flex flex-wrap justify-between sticky top-0 z-10 w-full mx-auto px-8 ${
           isScrolled ? "bg-white bg-opacity-20  shadow-lg" : "bg-transparent"}`}>
-      <img src="images/icons/logo.png" alt="" className="h-16 mt-3" />
       <Navlink />
     </header>
     </>
