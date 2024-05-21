@@ -3,7 +3,7 @@ import Footer from "../components/elements/footer";
 import FormContact from "../components/Fragments/FormContact";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {Instagram} from "lucide-react";
+import { Instagram } from "lucide-react";
 
 const ContactPage = () => {
   return (
@@ -56,7 +56,7 @@ const ContactPage = () => {
                 className="w-20 h-20 rounded-full flex justify-center items-center bg-blue-300"
               >
                 <div className="w-[4rem] h-[4rem] flex justify-center items-center rounded-full border border-slate-800 text-slate-800 hover:text-white transition">
-                <Instagram className="size-10"/>
+                  <Instagram className="size-10" />
                 </div>
               </a>
               <h3 className="font-bold mt-2 text-white">Instagram</h3>
