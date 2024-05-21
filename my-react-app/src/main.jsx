@@ -10,6 +10,7 @@ import  AboutPage  from "./Page/About.jsx";
 import './index.css'
 import SewaLapangan from "./Page/SewaLapangan.jsx";
 import Pembayaran from "./Page/Pembayaran.jsx";
+import DetailPembayaran from "./Page/DetailPembayaran.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/Pembayaran",
     element: <Pembayaran />,
+  },
+  {
+    path: "/DetailPembayaran",
+    element: <DetailPembayaran />,
   },
 ])
 

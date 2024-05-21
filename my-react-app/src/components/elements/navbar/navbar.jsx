@@ -20,10 +20,13 @@ const Navbar = () => {
 
   return (
     <>
-    <header className={`flex flex-wrap justify-between sticky top-0 z-10 w-full mx-auto px-8 ${
-          isScrolled ? "bg-white bg-opacity-20  shadow-lg" : "bg-transparent"}`}>
-      <Navlink />
-    </header>
+      <header
+        className={`flex flex-wrap justify-between sticky top-0 z-10 w-full mx-auto px-8 ${
+          isScrolled ? "bg-white bg-opacity-20  shadow-lg" : "bg-transparent"
+        }`}
+      >
+        <Navlink />
+      </header>
     </>
   );
 };

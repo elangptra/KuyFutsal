@@ -15,12 +15,15 @@ const FormContact = () => {
         placeholder="Masukkan email anda disini.."
         name="email"
       />
-      <textarea name="pertanyaan" className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-70 h-32" placeholder="Masukkan pertanyaan anda disini.."></textarea>
+      <textarea
+        name="pertanyaan"
+        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 h-32"
+        placeholder="Masukkan pertanyaan anda disini.."
+      ></textarea>
 
       <Button type="submit" classname="bg-blue-500 text-white mt-5">
         Kirim
       </Button>
-      
     </form>
   );
 };
