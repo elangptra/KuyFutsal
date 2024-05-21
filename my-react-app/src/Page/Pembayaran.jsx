@@ -2,33 +2,23 @@ import React from "react";
 import Navbar from "../components/elements/navbar/navbar";
 import Footer from "../components/elements/footer";
 import Button from "../components/elements/button/index";
-import ModalReschedule from "../components/elements/ModalReschedule";
-import ModalPembayaran from "../components/elements/ModalPembayaran";
+import Modal from "../components/elements/modal";
 import {ArrowLeft, ChevronRight} from "lucide-react";
 import { useState } from 'react';
 
 
 const Pembayaran = () => {
-    const [isModalRescheduleVisible, setModalRescheduleVisible] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [modalType, setModalType] = useState('');
 
-    const [isModalPembayaranVisible, setModalPembayaranVisible] = useState(false);
-
-    const openModalReschedule = (event) => {
+    const openModal = (type) => (event) => {
         event.preventDefault();
-        setModalRescheduleVisible(true);
+        setModalType(type);
+        setModalVisible(true);
     };
 
-    const closeModalReschedule = () => {
-        setModalRescheduleVisible(false);
-    };
-
-    const openModalPembayaran = (event) => {
-        event.preventDefault();
-        setModalPembayaranVisible(true);
-    };
-
-    const closeModalPembayaran = () => {
-        setModalPembayaranVisible(false);
+    const closeModal = () => {
+        setModalVisible(false);
     };
 
   return (
@@ -87,19 +77,18 @@ const Pembayaran = () => {
                         </div>
                     </div>
                 </div>
-                <a href="#" onClick={openModalReschedule}>
+                <a href="#" onClick={openModal('reschedule')}>
                     <div className="flex flex-wrap justify-between bg-white rounded-lg p-4 my-5">
                         <h5 className="text-base">Detail Reschedule & Pembatalan</h5>
                         <ChevronRight />
                     </div>
                 </a>
-                <ModalReschedule isVisible={isModalRescheduleVisible} onClose={closeModalReschedule} />
                 <div className="w-full">
-                    <Button onClick={openModalPembayaran} classname="w-full text-base font-normal text-white bg-blue-500">
+                    <Button onClick={openModal('pembayaran')} classname="w-full text-base font-normal text-white bg-blue-500">
                         Lanjutkan Ke Pembayaran
                     </Button>
-                    <ModalPembayaran isVisible={isModalPembayaranVisible} onClose={closeModalPembayaran} />
                 </div>
+                <Modal isVisible={isModalVisible} onClose={closeModal} type={modalType} />
             </div>
         </div>
     </div>
