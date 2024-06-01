@@ -11,6 +11,7 @@ import './index.css'
 import SewaLapangan from "./Page/SewaLapangan.jsx";
 import Pembayaran from "./Page/Pembayaran.jsx";
 import DetailPembayaran from "./Page/DetailPembayaran.jsx";
+import VirtualAccount from "./Page/VirtualAccount.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: "/DetailPembayaran",
     element: <DetailPembayaran />,
+  },
+  {
+    path: "/VirtualAccount",
+    element: <VirtualAccount />,
   },
 ])
 
