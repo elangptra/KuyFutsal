@@ -61,8 +61,8 @@ const Modal = ({ isVisible, onClose, type }) => {
                         <p className="text-base font-normal text-slate-500 text-center mb-4">
                             Apakah Kamu yakin untuk melakukan pembayaran ini?
                         </p>
-                        </div>
-                        <div className="flex flex-wrap justify-between">
+                    </div>
+                    <div className="flex flex-wrap justify-between">
                         <Button
                             type="button"
                             onClick={onClose}
@@ -73,6 +73,39 @@ const Modal = ({ isVisible, onClose, type }) => {
                             type="button"
                             classname="bg-blue-600 mb-2 mt-3 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] transition-all duration-300">
                             <Link to="/VirtualAccount">Ya, lanjutkan!</Link>
+                        </Button>
+                    </div>
+                </>
+                ) : type === 'success-verif' ? (
+                    <>
+                        <div className="flex flex-col items-center mb-4">
+                            <img src="images/icons/success-icon.png" alt="Alert-Icon" className="w-[50px] h-[50px] mb-4" />
+                            <h2 className="text-xl mb-4">Pembayaran Sudah Terverifikasi</h2>
+                            <p className="text-base font-normal text-slate-500 text-center mb-4">
+                                Terima kasih sudah menggunakan layanan kami
+                            </p>
+                            <Button
+                                type="button"
+                                classname="w-[50%] bg-blue-600 mb-2 mt-3 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] transition-all duration-300">
+                                <Link to="/Homepage">Beranda</Link>
+                            </Button>
+                        </div>
+                    </>
+                ) : type === 'error' ? (
+                <>
+                    <div className="flex flex-col items-center mb-4">
+                        <img src="images/icons/error-icon.png" alt="Error-Icon" className="w-[50px] h-[50px] mb-4" />
+                        <h2 className="text-xl font-bold mb-4">Terjadi Kesalahan</h2>
+                        <p className="text-base font-normal text-red-500 text-center mb-4">
+                            Mohon lengkapi data yang diperlukan untuk melanjutkan pembayaran!
+                        </p>
+                    </div>
+                    <div className="flex justify-center">
+                        <Button
+                            type="button"
+                            onClick={onClose}
+                            classname="bg-red-600 mb-2 mt-3 text-white hover:bg-red-700 transition-all duration-300">
+                            <p className="text-white">Tutup</p>
                         </Button>
                     </div>
                 </>

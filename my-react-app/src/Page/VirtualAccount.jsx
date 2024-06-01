@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/elements/navbar/navbar";
 import Footer from "../components/elements/footer";
 import Button from "../components/elements/button/index";
+import Modal from "../components/elements/modal";
 import { useState, useEffect } from "react";
 
 const VirtualAccount = () => {
@@ -25,6 +26,19 @@ const VirtualAccount = () => {
     setTime(`${hours}:${minutes}`);
   }, []);
 
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState("");
+
+  const openModal = (type) => (event) => {
+    event.preventDefault();
+    setModalType(type);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <div className="top-0 bg-[#171830]">
       {/* Navbar Start */}
@@ -44,10 +58,15 @@ const VirtualAccount = () => {
             <h3 className="text-base m-10">
               Silahkan untuk melakukan pembayaran sebelum pukul {time}
             </h3>
-            <Button classname="w-[65%] text-base font-normal text-white bg-blue-500">
+            <Button onClick={openModal("success-verif")} classname="w-[65%] text-base font-normal text-white bg-blue-500">
               Cek Status Pembayaran
             </Button>
           </div>
+          <Modal
+              isVisible={isModalVisible}
+              onClose={closeModal}
+              type={modalType}
+            />
         </div>
       </div>
       {/* Body End */}
