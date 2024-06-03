@@ -2,31 +2,22 @@ import { Link } from "react-router-dom";
 import Rating from "../rekomendasi/rating";
 import React, { useEffect, useState } from "react";
 import Api from "../../../api/lapangan-api";
-import axios from "axios";
 
 const DaftarLapangan = () => {
   const [lapangan, setLapangan] = useState([]);
   const [selectedKecamatan, setSelectedKecamatan] = useState("");
 
   useEffect(() => {
-    fetchLapangan();
-    // Api.get("/kecamatan")
-    //   .then((res) => {
-    //     setTimeout(() => {
-    //       setLapangan(res.data);
-    //     }, 2000);
-    //   })
-    //   .catch((err) => {
-    //     console.error("Error fetching data:", err);
+    Api.get("/kecamatan")
+      .then((res) => {
+        setTimeout(() => {
+          setLapangan(res.data);
+        }, 2000);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
   }, []);
-  const fetchLapangan = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/kecamatan");
-      setLapangan(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   const displayTempatFutsal = (kecamatan) => {
     if (kecamatan) {
@@ -72,7 +63,7 @@ const DaftarLapangan = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-8 m-10 lg:mb-[120px] md:mb-[230px] text-white">
         {displayTempatFutsal(selectedKecamatan).map((venue) => (
-          <Link to={`/detail/${venue.nama}/${venue.id}`} key={venue.id}>
+          <Link to={`/detailLapangan/${venue.nama}/${venue.id}`} key={venue.id}>
             <div className="rounded-xl overflow-hidden shadow-lg hover:scale-105 duration-300 cursor-pointer bg-gradient-to-br from-[#0057A8] to-[#002242]">
               <img src={venue.image} alt={venue.nama} className="w-full" />
               <div className="p-4">
