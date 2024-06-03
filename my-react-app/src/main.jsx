@@ -12,6 +12,7 @@ import SewaLapangan from "./Page/SewaLapangan.jsx";
 import Pembayaran from "./Page/Pembayaran.jsx";
 import DetailPembayaran from "./Page/DetailPembayaran.jsx";
 import PageDetailLapangan from "./Page/DetailLapangan.jsx";
+import VirtualAccount from "./Page/VirtualAccount.jsx";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
     element: <PageDetailLapangan />,
   }
 ]);
+    path: "/VirtualAccount",
+    element: <VirtualAccount />,
+  },
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
