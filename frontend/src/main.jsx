@@ -50,12 +50,12 @@ const router = createBrowserRouter([
   {
     path: "/detailLapangan/:nama/:id", // Menangani parameter nama dan id
     element: <PageDetailLapangan />,
-  }
-]);
+  },
+  {
     path: "/VirtualAccount",
     element: <VirtualAccount />,
-  },
-])
+  }
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
