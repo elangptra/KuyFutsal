@@ -2,22 +2,31 @@ import { Link } from "react-router-dom";
 import Rating from "../rekomendasi/rating";
 import React, { useEffect, useState } from "react";
 import Api from "../../../api/lapangan-api";
+import axios from "axios";
 
 const DaftarLapangan = () => {
   const [lapangan, setLapangan] = useState([]);
   const [selectedKecamatan, setSelectedKecamatan] = useState("");
 
   useEffect(() => {
-    Api.get("/kecamatan")
-      .then((res) => {
-        setTimeout(() => {
-          setLapangan(res.data);
-        }, 2000);
-      })
-      .catch((err) => {
-        console.error("Error fetching data:", err);
-      });
+    fetchLapangan();
+    // Api.get("/kecamatan")
+    //   .then((res) => {
+    //     setTimeout(() => {
+    //       setLapangan(res.data);
+    //     }, 2000);
+    //   })
+    //   .catch((err) => {
+    //     console.error("Error fetching data:", err);
   }, []);
+  const fetchLapangan = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/kecamatan");
+      setLapangan(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const displayTempatFutsal = (kecamatan) => {
     if (kecamatan) {
