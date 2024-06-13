@@ -1,40 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Api from "../../api/lapangan-api";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 import Rating from "../elements/rekomendasi/rating";
 import { format } from "date-fns";
 import Button from "../elements/button";
-import { Link } from "react-router-dom";
 
 const DetailLapangan = (props) => {
-  const { nama, id } = useParams();
+  const { id } = useParams(); // Mengambil parameter id dari URL
   const [lapanganDetail, setLapanganDetail] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [userId, setUserId] = useState(1); // ID pengguna yang sedang login, disesuaikan dengan aplikasi Anda
   const [selectedLapangan, setSelectedLapangan] = useState("Lapangan 1");
   const { img = "images/temukan venue 1.png" } = props;
 
   useEffect(() => {
-    Api.get(`/kecamatan`)
+    axios
+      .get(`http://localhost:3001/lapangan/${id}`)
       .then((res) => {
-        console.log("Response data:", res.data);
-        const allTempatFutsal = res.data.flatMap(
-          (kecamatan) => kecamatan.tempat_futsal
-        );
-        const lapangan = allTempatFutsal.find(
-          (item) => item.id === parseInt(id)
-        );
-        if (lapangan) {
-          console.log("Found lapangan:", lapangan);
-          setLapanganDetail(lapangan);
-        } else {
-          console.error("Lapangan not found");
-        }
+        console.log("Response data:", res.data.payload);
+        setLapanganDetail(res.data.payload[0]);
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
       });
-  }, [nama, id]);
+  }, [id]);
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -61,6 +51,30 @@ const DetailLapangan = (props) => {
     return lapanganDetail.harga * durationInHours;
   };
 
+  const handleBooking = () => {
+    const bookingData = {
+      TanggalBooking: selectedDate,
+      jam_booking: selectedTime.split(" - ")[0],
+      durasi: "01:00:00", // Durasi bisa dihitung berdasarkan waktu yang dipilih, ini adalah contoh
+      nomor_lapangan: parseInt(selectedLapangan.replace("Lapangan ", "")),
+      harga: calculateTotalPrice(),
+      id_lapangan: id,
+      id_pengguna: userId,
+    };
+
+    console.log("Booking data to be sent:", bookingData);
+
+    axios
+      .post("http://localhost:3001/bookinglapangan", bookingData)
+      .then((response) => {
+        console.log("Booking successful:", response.data);
+        // Tambahkan logika setelah booking berhasil, misalnya navigasi ke halaman pembayaran
+      })
+      .catch((error) => {
+        console.error("There was an error booking the lapangan!", error);
+      });
+  };
+
   if (!lapanganDetail) {
     return <div>Loading...</div>;
   }
@@ -70,7 +84,9 @@ const DetailLapangan = (props) => {
       <div className="container p-4 text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <h1 className="text-3xl font-bold">{lapanganDetail.nama}</h1>
+            <h1 className="text-3xl font-bold">
+              {lapanganDetail.nama_lapangan}
+            </h1>
             <p>{lapanganDetail.alamat}</p>
             <p>
               Buka: {lapanganDetail.jam_buka} - {lapanganDetail.jam_tutup}
@@ -86,8 +102,12 @@ const DetailLapangan = (props) => {
           </div>
           <div className="grid grid-cols-1 gap-2">
             <img
-              src={img}
-              alt={lapanganDetail.nama}
+              src={
+                lapanganDetail.gambar
+                  ? `http://localhost:3001/images/${lapanganDetail.gambar}`
+                  : img
+              }
+              alt={lapanganDetail.nama_lapangan}
               className="w-full h-64 object-cover rounded"
             />
           </div>
@@ -96,10 +116,13 @@ const DetailLapangan = (props) => {
         <div className="mt-8">
           <h2 className="text-2xl font-semibold">Fasilitas</h2>
           <div className="grid grid-cols-2 gap-4 mt-4">
-            <div>Jual Minuman</div>
-            <div>Parkir Motor</div>
-            <div>Toilet</div>
-            <div>Parkir Mobil</div>
+            {lapanganDetail.fasilitas && lapanganDetail.fasilitas.length > 0 ? (
+              lapanganDetail.fasilitas.map((facility, index) => (
+                <div key={index}>{facility}</div>
+              ))
+            ) : (
+              <div>Tidak ada informasi fasilitas</div>
+            )}
           </div>
         </div>
 
@@ -121,8 +144,15 @@ const DetailLapangan = (props) => {
                 value={selectedLapangan}
                 onChange={handleLapanganChange}
               >
-                <option>Lapangan 1</option>
-                <option>Lapangan 2</option>
+                {lapanganDetail.lapanganList ? (
+                  lapanganDetail.lapanganList.map((lapangan, index) => (
+                    <option key={index} value={lapangan}>
+                      {lapangan}
+                    </option>
+                  ))
+                ) : (
+                  <option value="Lapangan 1">Lapangan 1</option>
+                )}
               </select>
             </label>
           </div>
@@ -189,7 +219,7 @@ const DetailLapangan = (props) => {
               <div className="flex justify-between">
                 <p className="mb-7">Harga: </p>
                 <p>
-                  {lapanganDetail.harga.toLocaleString("id-ID", {
+                  {parseFloat(lapanganDetail.harga).toLocaleString("id-ID", {
                     style: "currency",
                     currency: "IDR",
                   })}
@@ -209,8 +239,9 @@ const DetailLapangan = (props) => {
             <Button
               type="submit"
               classname="bg-blue-500 mt-4 text-white w-full"
+              onClick={handleBooking}
             >
-              <Link to="/Pembayaran">Pesan Sekarang</Link>
+              Pesan Sekarang
             </Button>
           </div>
         </div>

@@ -18,6 +18,27 @@ Content-Type: application/json
 # Kecamatan
 ###
 GET http://localhost:3001/kecamatan
+###
+GET http://localhost:3001/kecamatan/1/1
+
+###
+POST http://localhost:3001/kecamatan
+Content-Type: application/json
+
+{
+    "id_kecamatan" : 12,
+    "nama_kecamatan" : "Tanggerang"
+}
+###
+PUT http://localhost:3001/kecamatan/1
+Content-Type: application/json
+
+{
+    "id_kecamatan" : 1,
+    "nama_kecamatan" : "Batuceper"
+}
+
+
 
 
 # lapangan
@@ -31,17 +52,33 @@ POST http://localhost:3001/lapangan
 content-type: application/json
 
 {
-    "id_lapangan": 8,
-    "nama_lapangan": "Cipta Panorama Futsal",
-    "alamat": "Jl. H. Risan No.31, RT.005/RW.010, Cipondoh Makmur, Kec. Cipondoh, Kota Tangerang, Banten 15148",
-    "jumlah_lapangan": 2,
-    "harga": 100000,
-    "gambar": null,
-    "jam_buka": "10:00",
-    "jam_tutup": "00:00",
-    "rating": 4,
+    "id_lapangan": 1,
+    "nama_lapangan": "lapangan kacer",
+    "alamat": "QJQ7+28X, Jl. Kakatua IV, RT.006/RW.012, Cibodasari, Kec. Cibodas, Kota Tangerang, Banten 15138",
+    "jumlah_lapangan": null,
+    "harga": 50000,
+    "gambar": "images/kecamatan/Cibodas/Lapangan Kacer.png",
+    "jam_buka": "08:00",
+    "jam_tutup": "22:00",
+    "rating": 5,
     "note": "Tidak boleh membawa makanan atau minuman dari luar",
-    "id_kecamatan": 1,
+    "id_kecamatan": 2,
     "id_pengelola": 2
-    
+}
+
+###
+GET http://localhost:3001/booking
+
+###
+POST http://localhost:3001/bookinglapangan
+content_type : application/json
+
+{
+  "TanggalBooking": "2024-06-15",
+  "jam_booking": "10:00:00",
+  "durasi": "01:00:00",
+  "nomor_lapangan": 2,
+  "harga": 50000,
+  "id_lapangan": 1,
+  "id_pengguna": 1
 }

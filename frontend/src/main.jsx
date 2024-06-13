@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginPage from './Page/Login.jsx';
-import RegisterPage from './Page/Register.jsx';
-import HomePage from './Page/HomePage.jsx';
-import Contact from './Page/Contact.jsx';
+import LoginPage from "./Page/Login.jsx";
+import RegisterPage from "./Page/Register.jsx";
+import HomePage from "./Page/HomePage.jsx";
+import Contact from "./Page/Contact.jsx";
 import AboutPage from "./Page/About.jsx";
-import './index.css';
+import "./index.css";
 import SewaLapangan from "./Page/SewaLapangan.jsx";
 import Pembayaran from "./Page/Pembayaran.jsx";
 import DetailPembayaran from "./Page/DetailPembayaran.jsx";
@@ -54,11 +54,11 @@ const router = createBrowserRouter([
   {
     path: "/VirtualAccount",
     element: <VirtualAccount />,
-  }
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </React.StrictMode>
 );

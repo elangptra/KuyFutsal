@@ -1,5 +1,5 @@
 const response = (statusCode, data, message, res) => {
-  res.json(statusCode, [
+  res.json(statusCode, 
     {
       payload: data,
       message: message,
@@ -9,7 +9,7 @@ const response = (statusCode, data, message, res) => {
         max: "",
       },
     },
-  ]);
+  );
 };
 
 export default response;
