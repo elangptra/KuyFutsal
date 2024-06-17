@@ -13,6 +13,7 @@ import Pembayaran from "./Page/Pembayaran.jsx";
 import DetailPembayaran from "./Page/DetailPembayaran.jsx";
 import PageDetailLapangan from "./Page/DetailLapangan.jsx";
 import VirtualAccount from "./Page/VirtualAccount.jsx";
+import EditProfile from "./Page/EditProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/VirtualAccount",
     element: <VirtualAccount />,
+  },
+  {
+    path: "/EditProfile",
+    element: <EditProfile />,
   },
 ]);
 
