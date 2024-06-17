@@ -21,8 +21,8 @@ const EditProfile = () => {
                     <h3 className="font-semibold text-2xl m-1 mt-32">El Satoru Manuk</h3>
                 </div>
                 <div className="flex flex-wrap mt-32">
-                    <Button  classname="text-base font-normal text-white bg-slate-500 mr-5">Ubah Foto</Button>
-                    <Button  classname="text-base font-normal text-white bg-blue-500">Simpan</Button>
+                    <Button classname="text-base font-normal text-white bg-slate-500 mr-5">Ubah Foto</Button>
+                    <Button classname="text-base font-normal text-white bg-blue-500">Simpan</Button>
                 </div>
             </div>
             <div className="flex flex-wrap justify-between items-start py-24">

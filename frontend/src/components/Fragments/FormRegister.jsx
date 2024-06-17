@@ -5,9 +5,9 @@ const FormRegister = () => {
   return (
     <form>
       <Input
-        type="text"
-        placeholder="Username"
-        name="username"
+        type="email"
+        placeholder="Email"
+        name="email"
       />
 
       <Input

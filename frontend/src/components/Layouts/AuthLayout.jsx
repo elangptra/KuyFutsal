@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { X } from "lucide-react";
+import { X, Camera } from "lucide-react";
+import Button from "../elements/button/index";
 
 const AuthLayout = (props) => {
-  const { children, title, type, img = "images/Login/login.png" } = props;
+  const { children, title, type } = props;
   return (
     <div className="flex justify-center min-h-screen items-center bg-[url('images/Login/login-bg.png')] bg-cover">
       <div
@@ -25,7 +26,7 @@ const AuthLayout = (props) => {
           <div className="mt-10">
             <p className="font-medium mb-4 text-slate-600">
               Selamat Datang di{" "}
-              <span className="font-bold" style={{ color: "#104E26" }}>
+              <span className="font-bold" style={{ color: "#171830" }}>
                 KuyFutsal
               </span>
             </p>
@@ -37,15 +38,9 @@ const AuthLayout = (props) => {
             </h1>
             {children}
             <Type type={type} />
-            <p className="text-slate-600 text-center ">
-              atau
-              <button className="text-slate-600 font-bold"></button>
-            </p>
           </div>
         </div>
-        <div>
-          <img src={`${img}`} className="w-[520px]" alt="login" />
-        </div>
+        < Imbanner type={type} />
       </div>
     </div>
   );
@@ -68,6 +63,25 @@ const Type = ({ type }) => {
         <Link to="/login" className="text-blue-600  font-bold">
           Masuk
         </Link>
+      </div>
+    );
+  }
+};
+
+const Imbanner = ({ type }) => {
+  if (type === "login") {
+    return (
+      <div>
+          <img src="/images/Login/login.png" className="w-[470px]" alt="login" />
+      </div>
+    );
+  } else {
+    return (
+      <div className="w-[470px] h-[570px] flex flex-col items-center justify-center p-5">
+          <div className="w-full flex border-2 border-slate-500 items-center justify-center p-36 mb-5">
+            <Camera className="size-20" />
+          </div>
+          <Button classname="text-base font-normal text-white bg-blue-500 mr-5">Upload Foto</Button>
       </div>
     );
   }
