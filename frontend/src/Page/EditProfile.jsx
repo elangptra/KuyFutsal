@@ -15,17 +15,17 @@ const EditProfile = () => {
       {/* Body Start */}
         <img src="/images/profile/edit-profile-banner.png" className="w-full" alt="edit-proifle-banner" />
         <div className="container">
-            <div className="w-full flex flex-wrap items-center -mt-32 justify-between">
+            <div className="w-full flex flex-wrap items-center -mt-24 justify-between">
                 <div className="flex flex-wrap text-white items-center">
-                    <img src="/images/profile/avatar.jpeg" className="rounded-full mr-10" alt="avatar-icon" />
-                    <h3 className="font-semibold text-2xl m-1 mt-32">El Satoru Manuk</h3>
+                    <img src="/images/profile/avatar.jpeg" className="w-[130px] h-[130px] rounded-full mr-10" alt="avatar-icon" />
+                    <h3 className="font-semibold text-2xl m-1 mt-28">El Satoru Manuk</h3>
                 </div>
-                <div className="flex flex-wrap mt-32">
+                <div className="flex flex-wrap mt-28">
                     <Button classname="text-base font-normal text-white bg-slate-500 mr-5">Ubah Foto</Button>
                     <Button classname="text-base font-normal text-white bg-blue-500">Simpan</Button>
                 </div>
             </div>
-            <div className="flex flex-wrap justify-between items-start py-24">
+            <div className="flex flex-wrap justify-between items-start py-20">
                 <div className="w-[48%]">
                     <h3 className="font-normal text-lg text-white m-1 mb-5">Nama Lengkap</h3>
                     <Input
