@@ -13,7 +13,7 @@ import DetailPembayaran from "./Page/DetailPembayaran.jsx";
 import PageDetailLapangan from "./Page/DetailLapangan.jsx";
 import VirtualAccount from "./Page/VirtualAccount.jsx";
 import AuthSuccess from "./Page/auth.succes.jsx";
-
+import EditProfile from "./Page/EditProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/success", // Rute untuk AuthSuccess
     element: <AuthSuccess/>,
+  },
+  {
+    path: "/EditProfile",
+    element: <EditProfile />,
   },
 ]);
 
