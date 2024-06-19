@@ -68,6 +68,8 @@ content-type: application/json
 
 ###
 GET http://localhost:3001/booking
+###
+GET http://localhost:3001/booking/3
 
 ###
 POST http://localhost:3001/bookinglapangan
@@ -82,3 +84,7 @@ content_type : application/json
   "id_lapangan": 1,
   "id_pengguna": 1
 }
+
+
+###
+GET http://localhost:3001/pengguna/1

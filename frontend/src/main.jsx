@@ -7,12 +7,12 @@ import RegisterPage from "./Page/Register.jsx";
 import HomePage from "./Page/HomePage.jsx";
 import Contact from "./Page/Contact.jsx";
 import AboutPage from "./Page/About.jsx";
-import "./index.css";
 import SewaLapangan from "./Page/SewaLapangan.jsx";
 import Pembayaran from "./Page/Pembayaran.jsx";
 import DetailPembayaran from "./Page/DetailPembayaran.jsx";
 import PageDetailLapangan from "./Page/DetailLapangan.jsx";
 import VirtualAccount from "./Page/VirtualAccount.jsx";
+import AuthSuccess from "./Page/auth.succes.jsx";
 import EditProfile from "./Page/EditProfile.jsx";
 
 const router = createBrowserRouter([
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     element: <SewaLapangan />,
   },
   {
-    path: "/Pembayaran",
+    path: "/Pembayaran/:id_booking",
     element: <Pembayaran />,
   },
   {
@@ -55,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/VirtualAccount",
     element: <VirtualAccount />,
+  },
+  {
+    path: "/auth/success", // Rute untuk AuthSuccess
+    element: <AuthSuccess/>,
   },
   {
     path: "/EditProfile",

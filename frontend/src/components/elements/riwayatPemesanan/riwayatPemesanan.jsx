@@ -75,7 +75,7 @@ const RiwayatPemesanan = () => {
       {/* Schedule Icon */}
       <div>
         <img
-          src="images/schedule.png"
+          src="/images/schedule.png"
           alt=""
           className="w-6 mb-2 me-3 cursor-pointer"
           onClick={handleClickSchedule}

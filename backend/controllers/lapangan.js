@@ -32,7 +32,6 @@ export const getLapanganById = async (req, res) => {
 export const createLapangan = async (req, res) => {
   try {
     const {
-      id_lapangan,
       nama_lapangan,
       alamat,
       jumlah_lapangan,
@@ -41,17 +40,15 @@ export const createLapangan = async (req, res) => {
       jam_tutup,
       rating,
       note,
-      id_kecamatan,
-      id_pengelola,
+      id_kecamatan
     } = req.body;
 
     const gambar = req.file ? req.file.filename : null;
 
     const result = await query(
-      `INSERT INTO lapangan (id_lapangan, nama_lapangan, alamat, jumlah_lapangan, harga, gambar, jam_buka, jam_tutup, rating, note, id_kecamatan, id_pengelola)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO lapangan ( nama_lapangan, alamat, jumlah_lapangan, harga, gambar, jam_buka, jam_tutup, rating, note, id_kecamatan)
+       VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        id_lapangan,
         nama_lapangan,
         alamat,
         jumlah_lapangan,
@@ -62,7 +59,6 @@ export const createLapangan = async (req, res) => {
         rating,
         note,
         id_kecamatan,
-        id_pengelola,
       ]
     );
 
@@ -73,76 +69,33 @@ export const createLapangan = async (req, res) => {
   }
 };
 
-
-export const updateLapangan = async (req, res) => {
+export const updateLapanganImage = async (req, res) => {
   try {
     const { id_lapangan } = req.params;
-    const {
-      nama_lapangan,
-      alamat,
-      jumlah_lapangan,
-      harga,
-      jam_buka,
-      jam_tutup,
-      rating,
-      note,
-      id_kecamatan,
-      id_pengelola,
-    } = req.body;
 
-    // Check if a new image file was uploaded
-    let gambar;
-    if (req.file) {
-      gambar = req.file.filename;
+    if (!req.file) {
+      return response(400, null, "No image file uploaded", res);
+    }
 
-      // Optionally delete the old image file if needed
-      const oldLapangan = await query(
-        `SELECT gambar FROM lapangan WHERE id_lapangan = ?`,
-        [id_lapangan]
-      );
-      if (oldLapangan.length > 0 && oldLapangan[0].gambar) {
-        const oldImagePath = path.join(__dirname, '../assets/', oldLapangan[0].gambar);
-        fs.unlink(oldImagePath, (err) => {
-          if (err) {
-            console.error("Failed to delete old image:", err);
-          }
-        });
-      }
-    } else {
-      gambar = req.body.gambar; // Keep the existing image if no new image is uploaded
+    const gambar = req.file.filename;
+
+    // Get the current image to delete the old one
+    const oldLapangan = await query(`SELECT gambar FROM lapangan WHERE id_lapangan = ?`, [id_lapangan]);
+    if (oldLapangan.length > 0 && oldLapangan[0].gambar) {
+      const oldImagePath = path.join(__dirname, '../assets/', oldLapangan[0].gambar);
+      fs.unlink(oldImagePath, (err) => {
+        if (err) {
+          console.error("Failed to delete old image:", err);
+        }
+      });
     }
 
     const result = await query(
-      `UPDATE lapangan SET
-         nama_lapangan = ?,
-         alamat = ?,
-         jumlah_lapangan = ?,
-         harga = ?,
-         gambar = ?,
-         jam_buka = ?,
-         jam_tutup = ?,
-         rating = ?,
-         note = ?,
-         id_kecamatan = ?,
-         id_pengelola = ?
-         WHERE id_lapangan = ?`,
-      [
-        nama_lapangan,
-        alamat,
-        jumlah_lapangan,
-        harga,
-        gambar,
-        jam_buka,
-        jam_tutup,
-        rating,
-        note,
-        id_kecamatan,
-        id_pengelola,
-        id_lapangan,
-      ]
+      `UPDATE lapangan SET gambar = ? WHERE id_lapangan = ?`,
+      [gambar, id_lapangan]
     );
 
-    response(200, result, "Success", res);
+    response(200, result, "Image updated successfully", res);
   } catch (error) {
     console.log(error);
     response(500, null, "Internal Server Error", res);

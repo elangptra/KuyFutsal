@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/elements/navbar/navbar";
 import Footer from "../components/elements/footer";
 import Button from "../components/elements/button/index";
 import Modal from "../components/elements/modal";
 import { ArrowLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Pembayaran = () => {
+  const { id_booking } = useParams();
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState("");
+  const [pembayaran, setPembayaran] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/booking/${id_booking}`)
+      .then((res) => {
+        console.log("Response data:", res.data.payload);
+        if (res.data.payload.length > 0) {
+          setPembayaran(res.data.payload[0]);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  }, [id_booking]);
 
   const openModal = (type) => (event) => {
     event.preventDefault();
@@ -19,6 +36,24 @@ const Pembayaran = () => {
   const closeModal = () => {
     setModalVisible(false);
   };
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
+
+  if (!pembayaran) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="top-0 bg-[#171830]">
@@ -31,17 +66,23 @@ const Pembayaran = () => {
         <div className="flex flex-wrap justify-between items-start py-24">
           <div className="w-8/12 bg-white rounded-lg p-5">
             <div>
-              <h3 className="font-semibold text-2xl m-2">Nama Lapangan</h3>
+              <h3 className="font-semibold text-2xl m-2">
+                {pembayaran.nama_lapangan}
+              </h3>
               <p className="text-base m-2">
-                <span>⭐</span> rating • Kota Tangerang
+                <span>⭐</span> {pembayaran.rating} • Kota Tangerang
               </p>
             </div>
             <div className="border-t-2 border-dashed border-black m-2"></div>
             <div className="py-4">
-              <h3 className="font-semibold text-2xl m-2">Lapangan 1/2</h3>
-              <p className="text-base m-2">• Hari, Tanggal Bulan Tahun</p>
+              <h3 className="font-semibold text-2xl m-2">
+                Lapangan {pembayaran.nomor_lapangan}
+              </h3>
+              <p className="text-base m-2">
+                • {formatDate(pembayaran.TanggalBooking)}
+              </p>{" "}
               <div className=" w-[119px] text-center border border-black rounded-md bg-transparent m-2">
-                <p className="text-base">16:00 - 17:00</p>
+                <p className="text-base">{pembayaran.jam_booking}</p>
               </div>
             </div>
             <div className="border-t-2 border-dashed border-black m-2"></div>
@@ -63,7 +104,7 @@ const Pembayaran = () => {
               <div className="py-4">
                 <div className="flex flex-wrap justify-between">
                   <p className="text-base m-2">Biaya Sewa</p>
-                  <p className="text-base m-2">Rp. 100.000</p>
+                  <p className="text-base m-2">{formatCurrency(pembayaran.harga)}</p>
                 </div>
                 <div className="flex flex-wrap justify-between">
                   <p className="text-base m-2">Biaya Produk Tambahan</p>
@@ -74,7 +115,7 @@ const Pembayaran = () => {
               <div>
                 <div className="flex flex-wrap justify-between">
                   <p className="text-base m-2">Total</p>
-                  <p className="text-base m-2">Rp. 100.000</p>
+                  <p className="text-base m-2">{formatCurrency(pembayaran.harga)}</p>
                 </div>
               </div>
             </div>
