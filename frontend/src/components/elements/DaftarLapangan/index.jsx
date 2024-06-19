@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Rating from "../rekomendasi/rating";
 import axios from "axios";
+import Button from "../button";
 
 const DaftarLapangan = () => {
   const [lapangan, setLapangan] = useState([]);
@@ -55,9 +56,9 @@ const DaftarLapangan = () => {
 
   return (
     <>
-    <div className="w-full absolute top-[120px] left-20">
+    <div className="w-full absolute top-[120px]">
         <select
-          className="border border-gray-300 rounded lg:mt-[230px] sm:mt-[40px] sm:mr-5 px-3 text-lg bg-gray-600 text-white lg:w-[350px] md:w-[250px] md:h-[40px] sm:w-[250px] sm:h-[40px] lg:h-[50px] py-1"
+          className="border border-gray-300 rounded lg:mt-[230px] ms-10 sm:mt-[40px] sm:mr-5 px-3 text-lg bg-gray-600 text-white lg:w-[350px] md:w-[250px] md:h-[40px] sm:w-[250px] sm:h-[40px] lg:h-[50px] py-1"
           value={selectedKecamatan}
           onChange={handleKecamatanChange}
         >
@@ -81,7 +82,7 @@ const DaftarLapangan = () => {
           displayTempatFutsal(selectedKecamatan).map((venue) => (
             <Link to={`/detailLapangan/${venue.nama_lapangan}/${venue.id_lapangan}`} key={venue.id_lapangan}>
               <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-105 duration-300 cursor-pointer bg-gradient-to-br from-[#0057A8] to-[#002242]">
-                <img src={venue.gambar ? `http://localhost:3001/assets/${venue.gambar}` : 'default-image-path.jpg'} alt={venue.nama_lapangan} className="w-full" />
+                <img src={`http://localhost:3001/${venue.gambar}`} alt={venue.nama_lapangan} className="w-full" />
                 <div className="p-4">
                   <h2 className="text-md font-semibold mb-2">
                     {capitalizeFirstLetter(venue.nama_lapangan)}

@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 
+
+
+
 const AuthLayout = (props) => {
   const { children, title, type, img = "images/Login/login.png" } = props;
   return (
@@ -22,7 +25,7 @@ const AuthLayout = (props) => {
               </Link>
             </button>
           </div>
-          <div className="mt-10">
+          <div className="mt-3">
             <p className="font-medium mb-4 text-slate-600">
               Selamat Datang di{" "}
               <span className="font-bold" style={{ color: "#104E26" }}>
@@ -30,7 +33,7 @@ const AuthLayout = (props) => {
               </span>
             </p>
             <h1
-              className="text-7xl mb-2 text-600 "
+              className="text-5xl mb-2 text-600 "
               style={{ fontWeight: "500" }}
             >
               {title}
@@ -38,13 +41,12 @@ const AuthLayout = (props) => {
             {children}
             <Type type={type} />
             <p className="text-slate-600 text-center ">
-              atau
               <button className="text-slate-600 font-bold"></button>
             </p>
           </div>
         </div>
         <div>
-          <img src={`${img}`} className="w-[520px]" alt="login" />
+          <img src={`${img}`} className="w-[450px]" alt="login" />
         </div>
       </div>
     </div>
@@ -59,7 +61,11 @@ const Type = ({ type }) => {
         <Link to="/register" className="text-blue-600 font-bold">
           Buat Akun
         </Link>
+        <div>
+        <img src="/images/Login/logo.png" alt="" />
       </div>
+      </div>
+      
     );
   } else {
     return (

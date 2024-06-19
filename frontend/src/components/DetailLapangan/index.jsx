@@ -12,7 +12,6 @@ const DetailLapangan = (props) => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [userId, setUserId] = useState(1); // ID pengguna yang sedang login, disesuaikan dengan aplikasi Anda
   const [selectedLapangan, setSelectedLapangan] = useState("Lapangan 1");
-  const { img = "images/temukan venue 1.png" } = props;
 
   useEffect(() => {
     axios
@@ -69,6 +68,9 @@ const DetailLapangan = (props) => {
       .then((response) => {
         console.log("Booking successful:", response.data);
         // Tambahkan logika setelah booking berhasil, misalnya navigasi ke halaman pembayaran
+
+        // Redirect ke halaman utama
+        window.location.href = "/pembayaran" + response.data.id_booking;
       })
       .catch((error) => {
         console.error("There was an error booking the lapangan!", error);
@@ -84,15 +86,15 @@ const DetailLapangan = (props) => {
       <div className="container p-4 text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-3xl mt-10 font-bold capitalize">
               {lapanganDetail.nama_lapangan}
             </h1>
-            <p>{lapanganDetail.alamat}</p>
+            <p className="text-md my-4 capitalize">{lapanganDetail.alamat}</p>
             <p>
               Buka: {lapanganDetail.jam_buka} - {lapanganDetail.jam_tutup}
             </p>
             <p>{lapanganDetail.note}</p>
-            <div className="flex items-center">
+            <div className="flex items-center mb-4">
               <Rating rating={lapanganDetail.rating} />
               <span className="ml-2">{lapanganDetail.rating}</span>
             </div>
@@ -100,13 +102,9 @@ const DetailLapangan = (props) => {
               Cek Ketersediaan
             </button>
           </div>
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-2 mt-10">
             <img
-              src={
-                lapanganDetail.gambar
-                  ? `http://localhost:3001/images/${lapanganDetail.gambar}`
-                  : img
-              }
+              src={`http://localhost:3001/${lapanganDetail.gambar}`}
               alt={lapanganDetail.nama_lapangan}
               className="w-full h-64 object-cover rounded"
             />
@@ -116,18 +114,26 @@ const DetailLapangan = (props) => {
         <div className="mt-8">
           <h2 className="text-2xl font-semibold">Fasilitas</h2>
           <div className="grid grid-cols-2 gap-4 mt-4">
-            {lapanganDetail.fasilitas && lapanganDetail.fasilitas.length > 0 ? (
-              lapanganDetail.fasilitas.map((facility, index) => (
-                <div key={index}>{facility}</div>
-              ))
-            ) : (
-              <div>Tidak ada informasi fasilitas</div>
-            )}
+            <div className="flex items-center gap-2 h-8 mb-3">
+              <img src="/images/icons/minuman.png" alt="" />
+              <p>Jual Minuman</p>
+            </div>
+            <div className="flex items-center gap-2 h-8">
+              <img src="/images/icons/motor.png" alt="" />
+              <p>Parkir Motor</p>
+            </div>
+            <div className="flex items-center gap-2 h-8">
+              <img src="/images/icons/toilet.png" alt="" />
+              <p>Toilet</p>
+            </div>
+            <div className="flex items-center gap-2 h-8">
+              <img src="/images/icons/mobil.png" alt="" />
+              <p>Mobil</p>
+            </div>
           </div>
         </div>
-
-        <div className="mt-8">
-          <h2 className="text-2xl font-semibold">Booking Informasi</h2>
+        <div className="mt-10">
+          <h2 className="text-3xl font-bold mb-5">Booking Informasi</h2>
           <div className="grid grid-cols-4 ">
             <label className="block">
               <span className="text-white">Tanggal</span>
@@ -241,7 +247,11 @@ const DetailLapangan = (props) => {
               classname="bg-blue-500 mt-4 text-white w-full"
               onClick={handleBooking}
             >
-              Pesan Sekarang
+              <Link
+                to={`/Pembayaran/${lapanganDetail.nama_lapangan}/${lapanganDetail.id_lapangan}`}
+              >
+                Pesan Sekarang
+              </Link>
             </Button>
           </div>
         </div>

@@ -40,7 +40,7 @@ const Navlink = () => {
     <>
       <nav className="w-full flex items-center justify-end">
         <div className="w-full items-center justify-between md:flex">
-          <img src="images/icons/logo.png" alt="" className="h-16 mt-3 block" />
+          <img src="/images/icons/logo.png" alt="" className="h-16 mt-3 block" />
           <div className="hidden md:block">
             <Links />
           </div>

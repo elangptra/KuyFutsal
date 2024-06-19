@@ -35,22 +35,22 @@ const Footer = () => {
               <p className="font-semibold text-md uppercase">Payments</p>
               <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:m-10 lg:mt-5">
                 <li className="mr-3">
-                  <img src="images/icons/bni-footer.png" alt="" className="w-[79px] h-[30px]" />
+                  <img src="/images/icons/bni-footer.png" alt="" className="w-[79px] h-[30px]" />
                 </li>
                 <li className="mr-3">
-                  <img src="images/icons/dana-footer.png" alt="" className="w-[102px] h-[30px]" />
+                  <img src="/images/icons/dana-footer.png" alt="" className="w-[102px] h-[30px]" />
                 </li>
                 <li className="">
-                  <img src="images/icons/gopay-footer.png" alt="" className="mt-[5px] w-[88px] h-[20px]"/>
+                  <img src="/images/icons/gopay-footer.png" alt="" className="mt-[5px] w-[88px] h-[20px]"/>
                 </li>
                 <li className="">
-                  <img src="images/icons/visa-footer.png" alt="" className="w-[74px] h-[30px]" />
+                  <img src="/images/icons/visa-footer.png" alt="" className="w-[74px] h-[30px]" />
                 </li>
                 <li className="">
-                  <img src="images/icons/mandiri-footer.png" alt="" className="-mt-[25px] w-[93px] h-[70px]" />
+                  <img src="/images/icons/mandiri-footer.png" alt="" className="-mt-[25px] w-[93px] h-[70px]" />
                 </li>
                 <li className="">
-                  <img src="images/icons/bca-footer.png" alt="" className="-mt-[23px] w-[99px] h-[74px]" />
+                  <img src="/images/icons/bca-footer.png" alt="" className="-mt-[23px] w-[99px] h-[74px]" />
                 </li>
               </ul>
             </div>
@@ -68,13 +68,13 @@ const Footer = () => {
             <div>
               <ul className="flex lg:mt-5 sm:mt-5 sm:ms-[200px]">
                 <li className="mr-3">
-                  <img src="images/instagram.png" alt="" className="w-[40px] h-[40px]" />
+                  <img src="/images/instagram.png" alt="" className="w-[40px] h-[40px]" />
                 </li>
                 <li className="mr-3">
-                  <img src="images/icons/tiktok-footer.png" alt="" className="w-[40px] h-[40px]" />
+                  <img src="/images/icons/tiktok-footer.png" alt="" className="w-[40px] h-[40px]" />
                 </li>
                 <li className="mr-3">
-                  <img src="images/whatsapp.png" alt="" className="w-[40px] h-[40px]" />
+                  <img src="/images/whatsapp.png" alt="" className="w-[40px] h-[40px]" />
                 </li>
               </ul>
             </div>
