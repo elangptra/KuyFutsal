@@ -24,19 +24,19 @@ const HomePage = (props) => {
   const kebahagian = [
     {
       id: 1,
-      icon: faSearch,
+      icon: "/images/icons/homepage-cari.png",
       title: "Cari",
       desc: "Temukan Lapangan Olahraga Yang Anda Inginkan.",
     },
     {
       id: 2,
-      icon: faBookmark,
+      icon: "/images/icons/homepage-lapangan.png",
       title: "Sewa",
       desc: "Pilih Kategori Lapangan Dan Atur Jadwal Anda.",
     },
     {
       id: 3,
-      icon: faRunning,
+      icon: "/images/icons/homepage-lari.png",
       title: "Nikmati",
       desc: "Nikmati Kesenangan Anda Saat Bermain.",
     },
@@ -100,11 +100,9 @@ const HomePage = (props) => {
                     }`}
                   >
                     {kebahagian.icon && (
-                      <FontAwesomeIcon
-                        icon={kebahagian.icon}
-                        size="2x"
-                        color="white"
-                        className="mb-5 bg-[#002242] p-3 rounded-2xl mx-[50%] translate-x-[-50%] "
+                      <img
+                      src={kebahagian.icon}
+                      className="mb-5 bg-[#002242] p-3 rounded-2xl mx-[50%] translate-x-[-50%]"
                       />
                     )}
                     <h1 className="text-3xl mt-[-10px] font-bold text-center">
