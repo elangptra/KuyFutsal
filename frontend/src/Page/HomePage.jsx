@@ -132,19 +132,19 @@ const HomePage = (props) => {
                   src={img}
                   alt="heading"
                   className="lg:w-[40%] md:w-[40%] sm:w-[100%] lg:h-1/2 md:h-full sm:h-full  "
-                  style={{ position: "relative", top: "30px" }}
+                  style={{ position: "relative" }}
                 />
                 <img
                   src={img2}
                   alt="heading"
-                  className="lg:w-[40%] md:w-[40%] sm:w-[100%] lg:h-1/2 md:h-full sm:h-full  "
-                  style={{ position: "relative", top: "-60px", right: "120px" }}
+                  className="lg:w-[35%] md:w-[35%] sm:w-[100%] lg:h-1/2 md:h-full sm:h-full  "
+                  style={{ position: "relative", top: "-80px", right: "140px" }}
                 />
                 <img
                   src={img3}
                   alt="heading"
-                  className="lg:w-[40%] md:w-[40%] sm:w-[100%] lg:h-1/2 md:h-full sm:h-full  "
-                  style={{ position: "relative", top: "-120px", right: "200px" }}
+                  className="lg:w-[35%] md:w-[35%] sm:w-[100%] lg:h-1/2 md:h-full sm:h-full  "
+                  style={{ position: "relative", top: "-120px", right: "240px" }}
                 />
               </div>
             </div>
