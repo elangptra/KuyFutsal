@@ -63,18 +63,20 @@ const DetailPembayaran = () => {
                 </p>
 
                 <form>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Nama Lengkap"
-                  ></Input>
                   <div className="flex flex-wrap justify-between">
                     <div className="w-[49%]">
-                      <Input
-                        type="tel"
-                        name="no_telp"
-                        placeholder="Nomor Telepon"
-                      ></Input>
+                      <input 
+                        type="text" 
+                        name="nama" 
+                        placeholder="Nama Lengkap" 
+                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
+                      />
+                      <input 
+                        type="text" 
+                        name="no_telp" 
+                        placeholder="Nomor Telepon" 
+                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black" 
+                      />
                       <div className="flex flex-col text-center items-center justify-center border p-10 border-black rounded-md bg-slate-400">
                         <UploadPhotoButton />
                         
@@ -87,17 +89,34 @@ const DetailPembayaran = () => {
                       </div>
                     </div>
                     <div className="w-[49%]">
-                      <Input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                      ></Input>
+                      <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="Email" 
+                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black" 
+                      />
+                      <input 
+                        type="password" 
+                        name="password" 
+                        placeholder="Password" 
+                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black" 
+                      />
+                      <input 
+                        type="password" 
+                        name="password" 
+                        placeholder="Konfirmasi Password" 
+                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black" 
+                      />
                       <div className="border border-black rounded-md bg-transparent">
                         <p className="text-base p-2">
                           <span>•</span> Silahkan foto wajah anda sebagai
                           kebijakan dari kami terimakasih.{" "}
                         </p>
                       </div>
+                      <Button
+                        classname="w-full text-base font-normal text-white my-5 bg-blue-500">
+                        Simpan
+                      </Button>
                     </div>
                   </div>
                 </form>
