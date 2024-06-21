@@ -1,46 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Button from "../elements/button";
-import Input from "../elements/input";
-import axios from 'axios';
+import axios from "axios";
 
 const FormLogin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [nama, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const token = localStorage.getItem('authToken');
 
   const handleLogin = async (event) => {
     event.preventDefault();
+
     try {
-      const response = await axios.post('http://localhost:3001/login', {
-        username,
+      const response = await axios.post('http://localhost:3001/login',
+      {
+        nama,
         password
-      });
-      const { token } = response.data.payload;
-      localStorage.setItem('authToken', token);
+      }
+    );
+      console.log(nama, password);
+      console.log('Login successful:', response.data.payload);
       window.location.href = '/homePage';
     } catch (err) {
-      setError('Login failed. Please check your credentials.');
+      setError('Login failed. Please check your username and password.');
       console.error('Error logging in:', err);
     }
   };
 
+
   return (
     <form onSubmit={handleLogin}>
-      <Input
-        type="text"
-        placeholder="Username"
-        name="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <Input
+   
+      <div className="mb-4">
+        <input
+          type="text"
+          name="nama"
+          value={nama}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+
+      <input
         type="password"
-        placeholder="Password"
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+     
       <div className="flex justify-between mb-4">
         <div className="flex items-center">
           <input
@@ -57,7 +62,6 @@ const FormLogin = () => {
       <Button type="submit" classname="bg-black text-white w-full">
         Masuk
       </Button>
-      
     </form>
   );
 };

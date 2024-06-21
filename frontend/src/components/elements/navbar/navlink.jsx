@@ -32,10 +32,27 @@ const Links = () => {
 
 const Navlink = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [fotoUrl, setFotoUrl] = useState(""); // State untuk menyimpan URL foto dari backend
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+
+  // Fungsi untuk menampilkan foto dari backend jika tersedia
+  const displayFoto = () => {
+    if (fotoUrl) {
+      return (
+        <img
+          src={fotoUrl}
+          alt="Foto Pengguna"
+          className="w-12 h-12 rounded-full object-cover"
+        />
+      );
+    } else {
+      return "Masuk";
+    }
+  };
+
   return (
     <>
       <nav className="w-full flex items-center justify-end">
@@ -49,11 +66,12 @@ const Navlink = () => {
               <RiwayatPemesanan />
             </div>
             <div>
+              {/* Tombol "Masuk" diganti dengan fungsi displayFoto */}
               <Button
                 type="button"
                 classname=" bg-blue-600 mb-2 mt-3 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] transition-all duration-300"
               >
-                <Link to="/login">Masuk</Link>
+                <Link to="/login">{displayFoto()}</Link>
               </Button>
             </div>
           </div>
@@ -67,7 +85,7 @@ const Navlink = () => {
             classname=" bg-blue-600 mb-2 mt-5 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] 
                     transition-all duration-300 md:my-0 my-2 md:mx-0 mx-3"
           >
-            <Link to="/login">Masuk</Link>
+            <Link to="/login">{displayFoto()}</Link>
           </Button>
           <button onClick={toggleNavbar} className="mt-3">
             {isOpen ? <X /> : <Menu />}

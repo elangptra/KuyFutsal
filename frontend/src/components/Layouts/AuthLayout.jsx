@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { X, Camera } from "lucide-react";
 import Button from "../elements/button/index";
-
-
-
+import { useState } from "react";
 
 const AuthLayout = (props) => {
   const { children, title, type } = props;
@@ -43,7 +41,7 @@ const AuthLayout = (props) => {
             <Type type={type} />
           </div>
         </div>
-        < Imbanner type={type} />
+        <Imbanner type={type} />
       </div>
     </div>
   );
@@ -57,17 +55,13 @@ const Type = ({ type }) => {
         <Link to="/register" className="text-blue-600 font-bold">
           Buat Akun
         </Link>
-        <div>
-        <img src="/images/Login/logo.png" alt="" />
       </div>
-      </div>
-      
     );
   } else {
     return (
       <div className="flex mt-2">
         <p className="text-md text-slate-600 mr-2 ">Sudah memiliki akun?</p>
-        <Link to="/login" className="text-blue-600  font-bold">
+        <Link to="/login" className="text-blue-600 font-bold">
           Masuk
         </Link>
       </div>
@@ -76,19 +70,46 @@ const Type = ({ type }) => {
 };
 
 const Imbanner = ({ type }) => {
+  const [photo, setPhoto] = useState(null);
+
+  const handlePhotoChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setPhoto(URL.createObjectURL(file));
+    }
+  };
+
   if (type === "login") {
     return (
       <div>
-          <img src="/images/Login/login.png" className="w-[470px]" alt="login" />
+        <img src="/images/Login/login.png" className="w-[470px]" alt="login" />
       </div>
     );
   } else {
     return (
       <div className="w-[470px] h-[570px] flex flex-col items-center justify-center p-5">
-          <div className="w-full flex border-2 border-slate-500 items-center justify-center p-36 mb-5">
+        <div className="w-full flex border-2 border-slate-500 items-center justify-center p-36 mb-5 relative">
+          {photo ? (
+            <img
+              src={photo}
+              alt="Preview"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          ) : (
             <Camera className="size-20" />
-          </div>
-          <Button classname="text-base font-normal text-white bg-blue-500 mr-5">Upload Foto</Button>
+          )}
+        </div>
+        <div className="relative">
+          <input
+            type="file"
+            name="photo"
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            onChange={handlePhotoChange}
+          />
+          <Button classname="text-base font-normal text-white bg-blue-500">
+            {photo ? "Ganti Foto" : "Upload Foto"}
+          </Button>
+        </div>
       </div>
     );
   }
