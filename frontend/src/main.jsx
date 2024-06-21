@@ -14,6 +14,7 @@ import PageDetailLapangan from "./Page/DetailLapangan.jsx";
 import VirtualAccount from "./Page/VirtualAccount.jsx";
 import AuthSuccess from "./Page/auth.succes.jsx";
 import EditProfile from "./Page/EditProfile.jsx";
+import DashboardPengelola from "./Page/DashboardPengelola.jsx";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: "/EditProfile",
     element: <EditProfile />,
+  },
+  {
+    path: "/DashboardPengelola",
+    element: <DashboardPengelola />,
   },
 ]);
 
