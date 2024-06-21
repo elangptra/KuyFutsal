@@ -30,16 +30,16 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { nama, password } = req.body;
+  const { email, password } = req.body;
 
   console.log(password);
-  if (nama === "" || password === "") {
+  if (email === "" || password === "") {
     return response(400, null, "Semuanya harus diisi", res);
   }
 
   try {
-    const [result] = await query("SELECT * FROM pengguna WHERE nama = ?", [
-      nama,
+    const [result] = await query("SELECT * FROM pengguna WHERE email = ?", [
+      email,
     ]);
     if (result.length === 0) {
       return response(404, null, "User not found", res);
