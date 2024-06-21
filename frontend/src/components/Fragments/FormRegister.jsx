@@ -47,15 +47,30 @@ const FormRegister = () => {
               Register
             </h1>
             <form>
-              <Input type="email" placeholder="Email" name="email" />
-
-              <Input type="password" placeholder="Password" name="password" />
-              <Input
-                type="password"
-                placeholder="Konfirmasi Password"
-                name="password"
+              <input
+                type="text"
+                name="nama"
+                placeholder="Masukkan Nama"
+                className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
               />
-
+              <input
+                type="email"
+                name="email"
+                placeholder="Masukkan Email"
+                className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Masukkan Password"
+                className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Konfirmasi Password"
+                className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
+              />
               <Button type="submit" classname="bg-black text-white w-full">
                 Daftar
               </Button>

@@ -62,6 +62,7 @@ const FormLogin = () => {
               <input
                 type="email"
                 name="email"
+                placeholder="Masukkan Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
@@ -69,6 +70,7 @@ const FormLogin = () => {
               <input
                 type="password"
                 name="password"
+                placeholder="Masukkan Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
