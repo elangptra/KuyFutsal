@@ -50,7 +50,8 @@ const login = async (req, res) => {
       return response(401, null, "Invalid password", res);
     }
     const token = jwt.sign(
-      { id_pengguna: result.id_pengguna },
+      { user : result },
+
       process.env.ACCESS_TOKEN_SECRET
     );
 

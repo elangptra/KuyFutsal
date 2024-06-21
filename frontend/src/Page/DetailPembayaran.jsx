@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Camera } from "lucide-react";
 import { useState } from "react";
 import Modal from "../components/elements/modal";
+import UploadPhotoButton from "../components/uploadPhotoButton";
 
 const DetailPembayaran = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -75,11 +76,8 @@ const DetailPembayaran = () => {
                         placeholder="Nomor Telepon"
                       ></Input>
                       <div className="flex flex-col text-center items-center justify-center border p-10 border-black rounded-md bg-slate-400">
-                        <Camera className="size-10" />
-                        <p>Buat foto nanti</p>
-                        <Button classname="text-base font-normal text-white bg-blue-500">
-                          Capture
-                        </Button>
+                        <UploadPhotoButton />
+                        
                       </div>
                       <div className="border border-black rounded-md bg-transparent mt-5">
                         <p className="text-base p-2">
