@@ -12,7 +12,7 @@ const Modal = ({ isVisible, onClose, type }) => {
                 {type === 'pembayaran' ? (
                 <>
                     <div className="flex flex-wrap mb-4">
-                        <img src="images/icons/modal-alert.png" alt="Alert-Icon" className="w-[50px] h-[50px]" />
+                        <img src="/images/icons/modal-alert.png" alt="Alert-Icon" className="w-[50px] h-[50px]" />
                     </div>
                     <div className="flex flex-col mb-4">
                         <h2 className="text-xl font-medium">Pesanan anda sudah benar?</h2>
@@ -56,7 +56,7 @@ const Modal = ({ isVisible, onClose, type }) => {
                 ) : type === 'membayar' ? (
                 <>
                     <div className="flex flex-col items-center mb-4">
-                        <img src="images/icons/modal-alert.png" alt="Alert-Icon" className="w-[50px] h-[50px] mb-4" />
+                        <img src="/images/icons/modal-alert.png" alt="Alert-Icon" className="w-[50px] h-[50px] mb-4" />
                         <h2 className="text-xl font-bold mb-4">Lakukan Pembayaran</h2>
                         <p className="text-base font-normal text-slate-500 text-center mb-4">
                             Apakah Kamu yakin untuk melakukan pembayaran ini?
@@ -79,7 +79,7 @@ const Modal = ({ isVisible, onClose, type }) => {
                 ) : type === 'success-verif' ? (
                     <>
                         <div className="flex flex-col items-center mb-4">
-                            <img src="images/icons/success-icon.png" alt="Alert-Icon" className="w-[50px] h-[50px] mb-4" />
+                            <img src="/images/icons/success-icon.png" alt="Alert-Icon" className="w-[50px] h-[50px] mb-4" />
                             <h2 className="text-xl mb-4">Pembayaran Sudah Terverifikasi</h2>
                             <p className="text-base font-normal text-slate-500 text-center mb-4">
                                 Terima kasih sudah menggunakan layanan kami
@@ -94,7 +94,7 @@ const Modal = ({ isVisible, onClose, type }) => {
                 ) : type === 'error' ? (
                 <>
                     <div className="flex flex-col items-center mb-4">
-                        <img src="images/icons/error-icon.png" alt="Error-Icon" className="w-[50px] h-[50px] mb-4" />
+                        <img src="/images/icons/error-icon.png" alt="Error-Icon" className="w-[50px] h-[50px] mb-4" />
                         <h2 className="text-xl font-bold mb-4">Terjadi Kesalahan</h2>
                         <p className="text-base font-normal text-red-500 text-center mb-4">
                             Mohon lengkapi data yang diperlukan untuk melanjutkan pembayaran!

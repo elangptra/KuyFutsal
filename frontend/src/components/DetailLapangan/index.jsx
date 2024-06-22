@@ -68,9 +68,8 @@ const DetailLapangan = (props) => {
       .then((response) => {
         console.log("Booking successful:", response.data);
         // Tambahkan logika setelah booking berhasil, misalnya navigasi ke halaman pembayaran
-
         // Redirect ke halaman utama
-        window.location.href = "/pembayaran" + response.data.id_booking;
+        window.location.href = "/pembayaran/" + response.data.payload.insertId;
       })
       .catch((error) => {
         console.error("There was an error booking the lapangan!", error);
@@ -85,7 +84,7 @@ const DetailLapangan = (props) => {
     <div className="mx-5">
       <div className="container p-4 text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
+          <div className="w-full md:w-full lg:w-full">
             <h1 className="text-3xl mt-10 font-bold capitalize">
               {lapanganDetail.nama_lapangan}
             </h1>
@@ -102,12 +101,28 @@ const DetailLapangan = (props) => {
               Cek Ketersediaan
             </button>
           </div>
-          <div className="grid grid-cols-1 gap-2 mt-10">
-            <img
-              src={`http://localhost:3001/${lapanganDetail.gambar}`}
-              alt={lapanganDetail.nama_lapangan}
-              className="w-full h-64 object-cover rounded"
-            />
+          <div className="w-full flex flex-col">
+            <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 lg:mt-0">
+              <div className="col-span-1">
+                <img
+                  src={`http://localhost:3001/${lapanganDetail.gambar}`}
+                  alt={lapanganDetail.nama_lapangan}
+                  className="w-full h-64 object-cover rounded"
+                />
+              </div>
+              <div className="col-span-1 flex justify-between">
+                <img
+                  src={`http://localhost:3001/${lapanganDetail.gambar}`}
+                  alt={lapanganDetail.nama_lapangan}
+                  className="w-[49%] h-64 object-cover rounded"
+                />
+                <img
+                  src={`http://localhost:3001/${lapanganDetail.gambar}`}
+                  alt={lapanganDetail.nama_lapangan}
+                  className="w-[49%] h-64 object-cover rounded"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -134,19 +149,19 @@ const DetailLapangan = (props) => {
         </div>
         <div className="mt-10">
           <h2 className="text-3xl font-bold mb-5">Booking Informasi</h2>
-          <div className="grid grid-cols-4 ">
+          <div className="grid grid-cols-4 gap-4">
             <label className="block">
               <span className="text-white">Tanggal</span>
               <input
                 type="date"
-                className="mt-1 block w-[250px] h-[40px] rounded-md text-black px-4 "
+                className="mt-1 block w-full h-10 rounded-md text-black px-4"
                 onChange={handleDateChange}
               />
             </label>
             <label className="block">
               <span className="text-white">Lapangan</span>
               <select
-                className="mt-1 block w-[250px] h-[40px] rounded-md text-black px-4"
+                className="mt-1 block w-full h-10 rounded-md text-black px-4"
                 value={selectedLapangan}
                 onChange={handleLapanganChange}
               >
@@ -163,9 +178,9 @@ const DetailLapangan = (props) => {
             </label>
           </div>
         </div>
-        <div className="flex h-auto">
-          <div className="grid-cols-2 md:grid-cols-2 mt-4 bg-white rounded-lg">
-            <div className="grid grid-cols-6  gap-4 p-4">
+        <div className="flex flex-col md:flex-row mt-4 mb-10 w-full">
+          <div className="w-full md:w-2/3 bg-white rounded-lg p-4">
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
               {[
                 "08:00 - 09:00",
                 "09:00 - 10:00",
@@ -196,63 +211,51 @@ const DetailLapangan = (props) => {
               ))}
             </div>
           </div>
-          <div className="ms-5 ">
-            <div className="w-[300px] mt-4 p-4 text-black h-[250px] bg-white rounded-lg">
-              <div className="flex border-b-2 w-full mb-5 justify-start border-black">
-                <div className="me-10 ">
-                  <p className="font-semibold text-lg">
-                    {" "}
-                    Tanggal <br />
-                  </p>
-                  <p>
-                    {selectedDate
-                      ? format(new Date(selectedDate), "d MMM yyyy")
-                      : "-"}
-                  </p>
-                </div>
-                <div className="border-l-2 border-black ">
-                  <p className="font-semibold text-lg ms-2">
-                    {" "}
-                    Lapangan <br />
-                  </p>
-                  <p className="ms-2">{selectedLapangan || "-"}</p>
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p className="mb-7 ">Durasi Waktu:</p>{" "}
-                <p>{selectedTime || "-"}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="mb-7">Harga: </p>
+          <div className="w-full md:w-1/3 mt-4 md:mt-0 md:ml-4 p-4 text-black bg-white rounded-lg">
+            <div className="flex border-b-2 w-full mb-5 justify-start border-black">
+              <div className="mr-10 ">
+                <p className="font-semibold text-lg">Tanggal</p>
                 <p>
-                  {parseFloat(lapanganDetail.harga).toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  })}
-                  /sesi
+                  {selectedDate
+                    ? format(new Date(selectedDate), "d MMM yyyy")
+                    : "-"}
                 </p>
               </div>
-              <div className="flex justify-between">
-                <p className="mb-7">Total: </p>
-                <p>
-                  {calculateTotalPrice().toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  })}
-                </p>
+              <div className="border-l-2 border-black pl-2">
+                <p className="font-semibold text-lg">Lapangan</p>
+                <p>{selectedLapangan || "-"}</p>
               </div>
             </div>
-            <Button
+            <div className="flex justify-between mb-7">
+              <p>Durasi Waktu:</p>
+              <p>{selectedTime || "-"}</p>
+            </div>
+            <div className="flex justify-between mb-7">
+              <p>Harga:</p>
+              <p>
+                {parseFloat(lapanganDetail.harga).toLocaleString("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                })}
+                /sesi
+              </p>
+            </div>
+            <div className="flex justify-between mb-7">
+              <p>Total:</p>
+              <p>
+                {calculateTotalPrice().toLocaleString("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                })}
+              </p>
+            </div>
+            <button
               type="submit"
-              classname="bg-blue-500 mt-4 text-white w-full"
+              className="bg-blue-500 hover:bg-blue-700 text-white w-full py-2 rounded mt-4"
               onClick={handleBooking}
             >
-              <Link
-                to={`/Pembayaran/${lapanganDetail.nama_lapangan}/${lapanganDetail.id_lapangan}`}
-              >
-                Pesan Sekarang
-              </Link>
-            </Button>
+              Pesan Sekarang
+            </button>
           </div>
         </div>
       </div>
