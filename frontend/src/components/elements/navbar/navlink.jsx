@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, UserRound, LogOut } from "lucide-react";
+import { Menu, X, UserRound, LogOut, Briefcase } from "lucide-react";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import RiwayatPemesanan from "../riwayatPemesanan/riwayatPemesanan";
 import Button from "../button";
 
@@ -31,7 +32,8 @@ const Links = () => {
 const Navlink = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [user, setUser] = useState(null); // State to store user data
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   const toggleNavbar = () => {
@@ -44,12 +46,17 @@ const Navlink = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("isAdmin");
     setUser(null);
+    setIsAdmin(false);
     navigate("/login");
   };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const adminStatus = localStorage.getItem("isAdmin") === "true";
+    setIsAdmin(adminStatus);
+
     if (token) {
       try {
         const base64Url = token.split('.')[1];
@@ -61,17 +68,26 @@ const Navlink = () => {
             .join('')
         );
         const user = JSON.parse(jsonPayload).user;
-        const userData = {
-          name: user.nama,
-          fotoUrl: user.foto || "/images/profile/avatar.jpeg", 
-        };
-
-        setUser(userData);
+        fetchUserData(user.id_pengguna);
       } catch (error) {
         console.error("Invalid token");
       }
     }
   }, []);
+
+  const fetchUserData = async (id_pengguna) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/pengguna/${id_pengguna}`);
+      const userData = response.data.payload[0];
+      const userDataWithDefaults = {
+        ...userData,
+        fotoUrl: userData.foto || "/images/profile/avatar.jpeg",
+      };
+      setUser(userDataWithDefaults);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const displayUser = () => {
     if (user) {
@@ -82,14 +98,14 @@ const Navlink = () => {
             alt="Foto Pengguna"
             className="w-12 h-12 rounded-full object-cover mr-3"
           />
-          <span className="font-semibold text-white">{user.name}</span>
+          <span className="font-semibold text-white">{user.nama}</span>
         </div>
       );
     } else {
       return (
         <Button
           type="button"
-          classname=" bg-blue-600 mb-2 mt-3 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] transition-all duration-300"
+          classname="bg-blue-600 mb-2 mt-3 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] transition-all duration-300"
         >
           <Link to="/login">Masuk</Link>
         </Button>
@@ -119,6 +135,14 @@ const Navlink = () => {
                       Edit Profile
                     </Link>
                   </div>
+                  {isAdmin && (
+                    <div className="flex flex-wrap items-center font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      <Briefcase />
+                      <Link to="/dashboardPengelola" className="ml-5">
+                        Management
+                      </Link>
+                    </div>
+                  )}
                   <div className="flex flex-wrap items-center font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     <LogOut />
                     <button onClick={handleLogout} className="ml-5">
@@ -136,7 +160,7 @@ const Navlink = () => {
           </div>
           <Button
             type="button"
-            classname=" bg-blue-600 mb-2 mt-5 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] 
+            classname="bg-blue-600 mb-2 mt-5 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] 
                     transition-all duration-300 md:my-0 my-2 md:mx-0 mx-3"
           >
             {localStorage.getItem("token") ? (

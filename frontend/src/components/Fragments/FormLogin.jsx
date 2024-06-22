@@ -23,11 +23,16 @@ const FormLogin = () => {
 
       const { bearerToken, ...user } = response.data.payload;
 
-      // Dispatch the credentials to the Redux store
-      dispatch(setCredentials({ token: bearerToken, user }));
+      // Check if the user is an admin
+      const pengelolaResponse = await axios.get(`http://localhost:3001/pengelola/pengguna/${user.id_pengguna}`);
+      const isAdmin = pengelolaResponse.data.payload.length > 0; // Check if payload array length is greater than 0
 
-      // Save token to local storage
+      // Dispatch the credentials to the Redux store, including admin status
+      dispatch(setCredentials({ token: bearerToken, user, isAdmin }));
+
+      // Save token and admin status to local storage
       localStorage.setItem('token', bearerToken);
+      localStorage.setItem('isAdmin', isAdmin);
 
       window.location.href = '/homePage';
     } catch (err) {

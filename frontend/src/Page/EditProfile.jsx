@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/elements/navbar/navbar";
 import Footer from "../components/elements/footer";
-import Button from "../components/elements/button/index";
-import Input from "../components/elements/input";
+import Button from "../components/elements/button";
+import SimpleModal from "../components/elements/simplemodal";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import UploadPhotoButton from "../components/uploadPhotoButton";
 
 const EditProfile = () => {
   const [user, setUser] = useState(null);
-  const [nama, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [foto, setPhoto] = useState(null);
+  const [inputNama, setInputNama] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputNoTelp, setInputNoTelp] = useState("");
   const [error, setError] = useState(null);
-  const [no_telp, setTelp] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,34 +26,46 @@ const EditProfile = () => {
             .join("")
         );
         const user = JSON.parse(jsonPayload).user;
-        const userData = {
-          id_pengguna: user.id_pengguna,
-          nama: user.nama,
-          email: user.email,
-          fotoUrl: user.foto || "/images/profile/avatar.jpeg",
-          no_telp: user.no_telp,
-        };
-
-        setUser(userData);
-        setName(userData.nama);
-        setEmail(userData.email);
-        setTelp(user.no_telp);
+        fetchUserData(user.id_pengguna);
       } catch (error) {
         console.error("Invalid token");
       }
     }
   }, []);
 
+  const fetchUserData = async (id_pengguna) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/pengguna/${id_pengguna}`
+      );
+      const userData = response.data.payload[0];
+      setUser(userData);
+      setInputNama(userData.nama);
+      setInputEmail(userData.email);
+      setInputNoTelp(userData.no_telp);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setError("Failed to fetch user data");
+    }
+  };
+
   const handleEditProfile = (event) => {
     event.preventDefault();
 
     axios
-      .put("http://localhost:3001/pengguna/" + user.id_pengguna, {
-        nama: nama,
-        email: email,
-        no_telp: no_telp,
+      .put(`http://localhost:3001/pengguna/${user.id_pengguna}`, {
+        nama: inputNama,
+        email: inputEmail,
+        no_telp: inputNoTelp,
       })
       .then((response) => {
+        setUser({
+          ...user,
+          nama: inputNama,
+          email: inputEmail,
+          no_telp: inputNoTelp,
+        });
+        setIsModalOpen(true);
         console.log(response);
       })
       .catch((error) => {
@@ -63,28 +73,38 @@ const EditProfile = () => {
       });
   };
 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+    setImagePreviewUrl(URL.createObjectURL(file));
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    window.location.reload(); // Refresh the website
+  };
+
   return (
     <div className="top-0 bg-[#171830]">
-      {/* Navbar Start */}
       <Navbar />
-      {/* Navbar End */}
-
-      {/* Body Start */}
       <img
         src="/images/profile/edit-profile-banner.png"
         className="w-full"
-        alt="edit-proifle-banner"
+        alt="edit-profile-banner"
       />
       <div className="container">
         <form onSubmit={handleEditProfile}>
           <div className="w-full flex flex-wrap items-center -mt-24 justify-between">
             <div className="flex flex-wrap text-white items-center">
               <img
-                src={user?.fotoUrl || "/images/profile/avatar.jpeg"}
+                src={user?.foto || "/images/profile/avatar.jpeg"}
                 className="w-[130px] h-[130px] rounded-full mr-10"
                 alt="avatar-icon"
               />
-              <h3 className="font-semibold text-2xl m-1 mt-28">{nama}</h3>
+              <h3 className="font-semibold text-2xl m-1 mt-28">{user?.nama}</h3>
             </div>
             <div className="flex flex-wrap mt-28">
               <Button
@@ -103,8 +123,8 @@ const EditProfile = () => {
               <input
                 type="text"
                 name="nama"
-                value={nama}
-                onChange={(e) => setName(e.target.value)}
+                value={inputNama}
+                onChange={(e) => setInputNama(e.target.value)}
                 className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
                 placeholder="Masukkan Nama Anda"
               />
@@ -112,8 +132,8 @@ const EditProfile = () => {
               <input
                 type="email"
                 name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={inputEmail}
+                onChange={(e) => setInputEmail(e.target.value)}
                 className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
                 placeholder="Masukkan Email Anda"
               />
@@ -123,44 +143,43 @@ const EditProfile = () => {
               <input
                 type="text"
                 name="no_telp"
-                value={no_telp}
-                onChange={(e) => setTelp(e.target.value)}
+                value={inputNoTelp}
+                onChange={(e) => setInputNoTelp(e.target.value)}
                 className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
                 placeholder="Masukkan Nomor Telepon Anda"
               />
             </div>
-            {/* <div className="w-[48%]">
+            <div className="w-[48%] rounded shadow-lg">
               <h3 className="font-normal text-lg text-white m-1 mb-5">
-                Password
+                Foto Profil
               </h3>
               <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
-                placeholder="Masukkan Password Anda"
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="block w-full text-sm rounded bg-white p-2 text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-300"
               />
-              <h3 className="font-normal text-lg text-white m-1 mb-5">
-                Konfirmasi Password
-              </h3>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
-                placeholder="Masukkan Konfirmasi Password Anda"
-              />
-            </div> */}
+              {selectedFile && (
+                <div className="mt-4">
+                  <h3 className="text-white font-medium">Selected File:</h3>
+                  <p className="text-white text-sm">{selectedFile.name}</p>
+                  <img
+                    src={imagePreviewUrl}
+                    alt="Selected"
+                    className="mt-4 w-full h-64 object-cover rounded"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </form>
       </div>
-      {/* Body End */}
-
-      {/* Footer Start */}
       <Footer />
-      {/* Footer End */}
+      <SimpleModal
+        isOpen={isModalOpen}
+        message="Profile updated successfully!"
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };

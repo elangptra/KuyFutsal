@@ -23,12 +23,12 @@ export const getPengelolaById = async (req, res) => {
   }
 };
 
-export const createPengelola = async (req, res) => {
+export const getPengelolaByIdPengguna = async (req, res) => {
   try {
-    const { id_pengelola, nama, alamat, phone } = req.body;
+    const { id_pengguna } = req.params;
     const result = await query(
-      `INSERT INTO pengelola (id_pengelola,nama,alamat, phone) VALUES (?,?, ?, ?)`,
-      [id_pengelola, nama, alamat, phone]
+      `SELECT id_pengelola FROM pengelola WHERE id_pengguna = ?`,
+      [id_pengguna]
     );
     response(200, result, "Success", res);
   } catch (error) {
