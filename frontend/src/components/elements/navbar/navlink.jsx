@@ -1,55 +1,87 @@
-import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X, UserRound, LogOut } from "lucide-react";
+import { useState, useEffect } from "react";
 import RiwayatPemesanan from "../riwayatPemesanan/riwayatPemesanan";
 import Button from "../button";
 
 const Links = () => {
   return (
-    <>
-      <div className="flex items-center justify-between font-semibold text-lg">
-        <ul className="md:flex justify-center items-center">
-          <Link to="/homePage">
-            <li className="mr-5 text-white hover:underline hover:p-1 hover:rounded-xl transition-all duration-300 md:my-0 my-3">
-              Home
-            </li>
-          </Link>
-          <Link to="/sewaLapangan">
-            <li className="mr-5 text-white hover:p-1 hover:underline hover:rounded-xl transition-all duration-300 md:my-0 my-3">
-              Sewa Lapangan
-            </li>
-          </Link>
-          <Link to="/about">
-            <li className="mr-5 text-white hover:p-1 hover:underline hover:rounded-xl transition-all duration-300 md:my-0 my-3">
-              About Us
-            </li>
-          </Link>
-        </ul>
-      </div>
-    </>
+    <div className="flex items-center justify-between font-semibold text-lg">
+      <ul className="md:flex justify-center items-center">
+        <Link to="/homePage">
+          <li className="mr-5 text-white hover:underline hover:p-1 hover:rounded-xl transition-all duration-300 md:my-0 my-3">
+            Home
+          </li>
+        </Link>
+        <Link to="/sewaLapangan">
+          <li className="mr-5 text-white hover:p-1 hover:underline hover:rounded-xl transition-all duration-300 md:my-0 my-3">
+            Sewa Lapangan
+          </li>
+        </Link>
+        <Link to="/about">
+          <li className="mr-5 text-white hover:p-1 hover:underline hover:rounded-xl transition-all duration-300 md:my-0 my-3">
+            About Us
+          </li>
+        </Link>
+      </ul>
+    </div>
   );
 };
 
 const Navlink = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [fotoUrl, setFotoUrl] = useState(""); // State untuk menyimpan URL foto dari backend
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null); // State to store user data
+  const navigate = useNavigate();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
-  // Fungsi untuk menampilkan foto dari backend jika tersedia
-  const displayFoto = () => {
-    if (fotoUrl) {
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    navigate('/login');
+  };
+
+  useEffect(() => {
+    // Example: Set user data from token
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Simulate fetching user data from token
+      const userData = {
+        name: "Manuk Satoru",
+        fotoUrl: "/images/profile/avatar.jpeg"
+      };
+      setUser(userData);
+    }
+  }, []);
+
+  const displayUser = () => {
+    if (user) {
       return (
-        <img
-          src={fotoUrl}
-          alt="Foto Pengguna"
-          className="w-12 h-12 rounded-full object-cover"
-        />
+        <div className="flex items-center cursor-pointer mt-2" onClick={toggleDropdown}>
+          <img
+            src={user.fotoUrl}
+            alt="Foto Pengguna"
+            className="w-12 h-12 rounded-full object-cover mr-3"
+          />
+          <span className="font-semibold text-white">{user.name}</span>
+        </div>
       );
     } else {
-      return "Masuk";
+      return (
+        <Button
+          type="button"
+          classname=" bg-blue-600 mb-2 mt-3 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] transition-all duration-300"
+        >
+          <Link to="/login">Masuk</Link>
+        </Button>
+      );
     }
   };
 
@@ -62,17 +94,30 @@ const Navlink = () => {
             <Links />
           </div>
           <div className="items-end relative me-5 hidden md:block">
-            <div className="absolute top-[-90px] right-[150px]">
+            <div className="absolute top-[-90px] right-[180px]">
               <RiwayatPemesanan />
             </div>
             <div>
-              {/* Tombol "Masuk" diganti dengan fungsi displayFoto */}
-              <Button
-                type="button"
-                classname=" bg-blue-600 mb-2 mt-3 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] transition-all duration-300"
-              >
-                <Link to="/login">{displayFoto()}</Link>
-              </Button>
+              {displayUser()}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-5 w-48 bg-white rounded-md shadow-lg py-2">
+                  <div className="flex flex-wrap items-center font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <UserRound />
+                    <Link to="/editProfile" className="ml-5">
+                      Edit Profile
+                    </Link>
+                  </div>
+                  <div className="flex flex-wrap items-center font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <LogOut />
+                    <button
+                      onClick={handleLogout}
+                      className="ml-5"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -85,7 +130,11 @@ const Navlink = () => {
             classname=" bg-blue-600 mb-2 mt-5 text-white hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.2),0_4px_18px_0_rgba(0,0,0,0.2),0_0_8px_rgba(0,0,0,0.2)] 
                     transition-all duration-300 md:my-0 my-2 md:mx-0 mx-3"
           >
-            <Link to="/login">{displayFoto()}</Link>
+            {localStorage.getItem('token') ? (
+              displayUser()
+            ) : (
+              <Link to="/login">Masuk</Link>
+            )}
           </Button>
           <button onClick={toggleNavbar} className="mt-3">
             {isOpen ? <X /> : <Menu />}

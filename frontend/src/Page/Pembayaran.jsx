@@ -3,7 +3,7 @@ import Navbar from "../components/elements/navbar/navbar";
 import Footer from "../components/elements/footer";
 import Button from "../components/elements/button/index";
 import Modal from "../components/elements/modal";
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -88,10 +88,8 @@ const Pembayaran = () => {
             <div className="border-t-2 border-dashed border-black m-2"></div>
             <div className="mt-5">
               <div className="flex flex-wrap">
-                <a href="#" className="flex flex-wrap">
-                  <ArrowLeft />
-                  <h5 className="font-semibold text-base">Tambah Jadwal</h5>
-                </a>
+                <ChevronRight />
+                <h5 className="font-semibold text-base">Mohon Perhatikan Pesanan Anda</h5>
               </div>
             </div>
           </div>
