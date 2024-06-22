@@ -6,6 +6,7 @@ import booking_router from "./booking.js";
 import auth_router from "./auth.route.js";
 import passport from "passport";
 import "../middlewares/passport.js";
+import pengguna_router from "./pengguna.route.js";
 
 
 const route = express();
@@ -16,5 +17,6 @@ route.use(booking_router);
 route.use(kecamatan_router);
 route.use(lapangan_router);
 route.use(pengelola_router);
+route.use(pengguna_router);
 
 export default route

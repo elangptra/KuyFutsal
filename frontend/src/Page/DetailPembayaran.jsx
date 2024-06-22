@@ -5,13 +5,17 @@ import Button from "../components/elements/button";
 import Input from "../components/elements/input";
 import { Link } from "react-router-dom";
 import { Camera } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../components/elements/modal";
 import UploadPhotoButton from "../components/uploadPhotoButton";
+import axios from "axios";
+
 
 const DetailPembayaran = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);

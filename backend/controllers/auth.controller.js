@@ -1,38 +1,49 @@
 import { query } from "../database/database.js";
 import jwt from "jsonwebtoken";
-import bcypt from "bcrypt";
+import bcrypt from "bcrypt"; // pastikan menggunakan bcrypt, bukan bcypt
 import dotenv from "dotenv";
 import response from "../response.js";
+import { upload } from '../middlewares/image.js';
 
 dotenv.config();
 
 const register = async (req, res) => {
-  const { nama, password, confirmPassword, email, no_telp, foto } = req.body;
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({ message: err });
+    } else {
+      const { nama, password, confirmPassword, email, no_telp } = req.body;
+      let foto = req.file ? req.file.filename : null;
 
-  if (nama === "" || password === "" || confirmPassword === "") {
-    return response(400, null, "Semuanya harus diisi", res);
-  }
+      if (nama === "" || password === "" || confirmPassword === "") {
+        return res.status(400).json({ message: "Semuanya harus diisi" });
+      }
 
-  if (password !== confirmPassword) {
-    return response(400, null, "Password tidak sama", res);
-  }
-  try {
-    const salt = await bcypt.genSalt(10);
-    const hashedPassword = await bcypt.hash(password, salt);
-    const result = await query(
-      "INSERT INTO pengguna (nama, password, email, no_telp, foto) VALUES (?, ?, ? , ?, null)",
-      [nama, hashedPassword, email, no_telp, foto]
-    );
-    response(200, result, "Success", res);
-  } catch (error) {
-    console.log(error);
-  }
+      if (password !== confirmPassword) {
+        return res.status(400).json({ message: "Password tidak sama" });
+      }
+
+      try {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        console.log(nama, hashedPassword, email, no_telp, foto);
+        const result = await query(
+          "INSERT INTO pengguna (nama, password, email, no_telp, foto) VALUES (?, ?, ? , ?, ?)",
+          [nama, hashedPassword, email, no_telp, foto]
+        );
+
+        res.status(200).json({ message: "Success", result });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error" });
+      }
+    }
+  });
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(password);
   if (email === "" || password === "") {
     return response(400, null, "Semuanya harus diisi", res);
   }
@@ -44,14 +55,12 @@ const login = async (req, res) => {
     if (result.length === 0) {
       return response(404, null, "User not found", res);
     }
-    const validPassword = await bcypt.compare(password, result.password);
-    // const validPassword = password===result.password
+    const validPassword = await bcrypt.compare(password, result.password); // pastikan menggunakan bcrypt, bukan bcypt
     if (!validPassword) {
       return response(401, null, "Invalid password", res);
     }
     const token = jwt.sign(
       { user : result },
-
       process.env.ACCESS_TOKEN_SECRET
     );
 
@@ -60,6 +69,7 @@ const login = async (req, res) => {
     response(200, { ...result, bearerToken }, "Success", res);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 

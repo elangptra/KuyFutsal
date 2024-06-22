@@ -1,5 +1,5 @@
 import express from 'express';
-import { upload } from '../middlewares/uploads.js';
+import { upload } from '../middlewares/unggah.js';
 import { getLapangan, getLapanganById, createLapangan, updateLapanganImage } from '../controllers/lapangan.js';
     
 const router = express.Router();
