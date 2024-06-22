@@ -53,3 +53,28 @@ export const login = async (req, res) => {
     }
 }
 
+export const getPenggunaById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const [result] = await query("SELECT * FROM pengguna WHERE id = ?", [id]);
+        response(200, result[0], "Success", res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updatePenggunaById = async (req, res) => {
+    const { id_pengguna } = req.params;
+    const { nama, email, no_telp } = req.body;
+    
+    try {
+        const result = await query(
+            "UPDATE pengguna SET nama = ?, email = ?, no_telp = ? WHERE id_pengguna = ?",
+            [nama, email, no_telp, id_pengguna]
+        );
+        response(200, result, "Success", res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+

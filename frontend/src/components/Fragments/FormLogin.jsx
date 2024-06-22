@@ -29,7 +29,6 @@ const FormLogin = () => {
       // Save token to local storage
       localStorage.setItem('token', bearerToken);
 
-      console.log('Login successful:', response.data.payload);
       window.location.href = '/homePage';
     } catch (err) {
       setError('Login failed. Please check your username and password.');
