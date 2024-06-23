@@ -177,6 +177,7 @@ const EditProfile = () => {
       <Footer />
       <SimpleModal
         isOpen={isModalOpen}
+        image= "/images/icons/success-icon.png"
         message="Profile updated successfully!"
         onClose={handleCloseModal}
       />

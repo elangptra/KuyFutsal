@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Rating from "../elements/rekomendasi/rating";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 import Button from "../elements/button";
+import SimpleModal from "../elements/simplemodal";
 
 const DetailLapangan = (props) => {
   const { id } = useParams(); // Mengambil parameter id dari URL
   const [lapanganDetail, setLapanganDetail] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [userId, setUserId] = useState(1); // ID pengguna yang sedang login, disesuaikan dengan aplikasi Anda
+  const [selectedTimes, setSelectedTimes] = useState([]); // Array for selected times
+  const [userId, setUserId] = useState(null); // ID pengguna yang sedang login
   const [selectedLapangan, setSelectedLapangan] = useState("Lapangan 1");
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [isLoginRequiredModalOpen, setIsLoginRequiredModalOpen] = useState(false);
+  const [isValidationErrorModalOpen, setIsValidationErrorModalOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -23,6 +27,24 @@ const DetailLapangan = (props) => {
       .catch((err) => {
         console.error("Error fetching data:", err);
       });
+
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+            .join("")
+        );
+        const user = JSON.parse(jsonPayload).user;
+        setUserId(user.id_pengguna);
+      } catch (error) {
+        console.error("Invalid token");
+      }
+    }
   }, [id]);
 
   const handleDateChange = (event) => {
@@ -30,7 +52,13 @@ const DetailLapangan = (props) => {
   };
 
   const handleTimeChange = (time) => {
-    setSelectedTime(time);
+    setSelectedTimes((prevTimes) => {
+      if (prevTimes.includes(time)) {
+        return prevTimes.filter((t) => t !== time);
+      } else {
+        return [...prevTimes, time];
+      }
+    });
   };
 
   const handleLapanganChange = (event) => {
@@ -38,23 +66,26 @@ const DetailLapangan = (props) => {
   };
 
   const calculateTotalPrice = () => {
-    if (!selectedTime) return 0;
-
-    const [start, end] = selectedTime.split(" - ").map((t) => t.split(":"));
-    const startTime = new Date();
-    startTime.setHours(start[0], start[1]);
-    const endTime = new Date();
-    endTime.setHours(end[0], end[1]);
-    const durationInHours = (endTime - startTime) / (1000 * 60 * 60); // Duration in hours
-
+    const durationInHours = selectedTimes.length;
     return lapanganDetail.harga * durationInHours;
   };
 
   const handleBooking = () => {
+    if (!userId) {
+      setIsLoginRequiredModalOpen(true);
+      return;
+    }
+
+    if (!selectedDate || selectedTimes.length === 0) {
+      setErrorMessage("Tanggal dan Jam harus diisi untuk melakukan booking.");
+      setIsValidationErrorModalOpen(true);
+      return;
+    }
+
     const bookingData = {
       TanggalBooking: selectedDate,
-      jam_booking: selectedTime.split(" - ")[0],
-      durasi: "01:00:00", // Durasi bisa dihitung berdasarkan waktu yang dipilih, ini adalah contoh
+      jam_booking: selectedTimes.join(", "),
+      durasi: `${selectedTimes.length}:00`, // Duration based on selected time slots
       nomor_lapangan: parseInt(selectedLapangan.replace("Lapangan ", "")),
       harga: calculateTotalPrice(),
       id_lapangan: id,
@@ -67,13 +98,17 @@ const DetailLapangan = (props) => {
       .post("http://localhost:3001/bookinglapangan", bookingData)
       .then((response) => {
         console.log("Booking successful:", response.data);
-        // Tambahkan logika setelah booking berhasil, misalnya navigasi ke halaman pembayaran
-        // Redirect ke halaman utama
+        // Redirect ke halaman pembayaran
         window.location.href = "/pembayaran/" + response.data.payload.insertId;
       })
       .catch((error) => {
         console.error("There was an error booking the lapangan!", error);
       });
+  };
+
+  const getTomorrowDate = () => {
+    const tomorrow = addDays(new Date(), 1);
+    return format(tomorrow, "yyyy-MM-dd");
   };
 
   if (!lapanganDetail) {
@@ -97,9 +132,11 @@ const DetailLapangan = (props) => {
               <Rating rating={lapanganDetail.rating} />
               <span className="ml-2">{lapanganDetail.rating}</span>
             </div>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
-              Cek Ketersediaan
-            </button>
+            <a href="#ketersediaan">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+                Cek Ketersediaan
+              </button>
+            </a>
           </div>
           <div className="w-full flex flex-col">
             <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 lg:mt-0">
@@ -147,7 +184,7 @@ const DetailLapangan = (props) => {
             </div>
           </div>
         </div>
-        <div className="mt-10">
+        <div id="ketersediaan" className="mt-10">
           <h2 className="text-3xl font-bold mb-5">Booking Informasi</h2>
           <div className="grid grid-cols-4 gap-4">
             <label className="block">
@@ -155,6 +192,7 @@ const DetailLapangan = (props) => {
               <input
                 type="date"
                 className="mt-1 block w-full h-10 rounded-md text-black px-4"
+                min={getTomorrowDate()}
                 onChange={handleDateChange}
               />
             </label>
@@ -201,7 +239,7 @@ const DetailLapangan = (props) => {
                   key={index}
                   onClick={() => handleTimeChange(time)}
                   className={`py-6 mt-2 px-4 text-sm rounded ${
-                    selectedTime === time
+                    selectedTimes.includes(time)
                       ? "bg-blue-500 text-white"
                       : "bg-gray-300 text-black"
                   }`}
@@ -228,7 +266,7 @@ const DetailLapangan = (props) => {
             </div>
             <div className="flex justify-between mb-7">
               <p>Durasi Waktu:</p>
-              <p>{selectedTime || "-"}</p>
+              <p>{selectedTimes.length} jam</p>
             </div>
             <div className="flex justify-between mb-7">
               <p>Harga:</p>
@@ -259,6 +297,18 @@ const DetailLapangan = (props) => {
           </div>
         </div>
       </div>
+      <SimpleModal
+        isOpen={isLoginRequiredModalOpen}
+        image="/images/icons/modal-alert.png"
+        message="Anda harus login terlebih dahulu untuk melakukan booking."
+        onClose={() => setIsLoginRequiredModalOpen(false)}
+      />
+      <SimpleModal
+        isOpen={isValidationErrorModalOpen}
+        image="/images/icons/modal-alert.png"
+        message={errorMessage}
+        onClose={() => setIsValidationErrorModalOpen(false)}
+      />
     </div>
   );
 };
