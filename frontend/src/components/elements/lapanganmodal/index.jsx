@@ -1,21 +1,42 @@
 import React, { useState, useEffect } from 'react';
 
 const LapanganModal = ({ isOpen, onClose, lapangan, onSave }) => {
-    const [editedLapangan, setEditedLapangan] = useState(lapangan);
+    const [editedLapangan, setEditedLapangan] = useState({
+        nama_lapangan: '',
+        harga: '',
+        jumlah_lapangan: '',
+        alamat: '',
+        jam_buka: '',
+        jam_tutup: '',
+    });
 
     useEffect(() => {
-        setEditedLapangan(lapangan);
+        if (lapangan) {
+            setEditedLapangan({
+                nama_lapangan: lapangan.nama_lapangan || '',
+                harga: lapangan.harga || '',
+                jumlah_lapangan: lapangan.jumlah_lapangan || '',
+                alamat: lapangan.alamat || '',
+                jam_buka: lapangan.jam_buka || '',
+                jam_tutup: lapangan.jam_tutup || '',
+            });
+        }
     }, [lapangan]);
 
     if (!isOpen) return null;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setEditedLapangan({ ...editedLapangan, [name]: value });
+        setEditedLapangan((prevState) => ({ ...prevState, [name]: value }));
     };
 
     const handleSave = () => {
-        onSave(editedLapangan);
+        if (editedLapangan.nama_lapangan && editedLapangan.harga && editedLapangan.jumlah_lapangan && editedLapangan.alamat && editedLapangan.jam_buka && editedLapangan.jam_tutup) {
+            onSave(editedLapangan);
+            alert("Data berhasil diubah!");
+        } else {
+            alert("Please fill in all fields before saving.");
+        }
     };
 
     return (
@@ -27,7 +48,7 @@ const LapanganModal = ({ isOpen, onClose, lapangan, onSave }) => {
                     <input
                         type="text"
                         name="nama_lapangan"
-                        value={editedLapangan.nama_lapangan || ''}
+                        value={editedLapangan.nama_lapangan}
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
@@ -35,9 +56,9 @@ const LapanganModal = ({ isOpen, onClose, lapangan, onSave }) => {
                 <div className="mb-4">
                     <label className="block text-gray-700">Harga Booking</label>
                     <input
-                        type="text"
+                        type="number"
                         name="harga"
-                        value={editedLapangan.harga || ''}
+                        value={editedLapangan.harga}
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
@@ -45,9 +66,9 @@ const LapanganModal = ({ isOpen, onClose, lapangan, onSave }) => {
                 <div className="mb-4">
                     <label className="block text-gray-700">Jumlah Lapangan</label>
                     <input
-                        type="text"
+                        type="number"
                         name="jumlah_lapangan"
-                        value={editedLapangan.jumlah_lapangan || ''}
+                        value={editedLapangan.jumlah_lapangan}
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
@@ -57,7 +78,7 @@ const LapanganModal = ({ isOpen, onClose, lapangan, onSave }) => {
                     <input
                         type="text"
                         name="alamat"
-                        value={editedLapangan.alamat || ''}
+                        value={editedLapangan.alamat}
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
@@ -65,9 +86,9 @@ const LapanganModal = ({ isOpen, onClose, lapangan, onSave }) => {
                 <div className="mb-4">
                     <label className="block text-gray-700">Jam Buka</label>
                     <input
-                        type="text"
+                        type="time"
                         name="jam_buka"
-                        value={editedLapangan.jam_buka || ''}
+                        value={editedLapangan.jam_buka}
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded"
                     />
@@ -75,9 +96,9 @@ const LapanganModal = ({ isOpen, onClose, lapangan, onSave }) => {
                 <div className="mb-4">
                     <label className="block text-gray-700">Jam Tutup</label>
                     <input
-                        type="text"
+                        type="time"
                         name="jam_tutup"
-                        value={editedLapangan.jam_tutup || ''}
+                        value={editedLapangan.jam_tutup}
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded"
                     />

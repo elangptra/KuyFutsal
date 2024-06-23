@@ -12,7 +12,8 @@ const DetailLapangan = (props) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTimes, setSelectedTimes] = useState([]); // Array for selected times
   const [userId, setUserId] = useState(null); // ID pengguna yang sedang login
-  const [selectedLapangan, setSelectedLapangan] = useState("Lapangan 1");
+  const [selectedLapangan, setSelectedLapangan] = useState("");
+  const [lapanganOptions, setLapanganOptions] = useState([]); // State for lapangan options
   const [errorMessage, setErrorMessage] = useState(""); // State for error message
   const [isLoginRequiredModalOpen, setIsLoginRequiredModalOpen] = useState(false);
   const [isValidationErrorModalOpen, setIsValidationErrorModalOpen] = useState(false);
@@ -22,7 +23,11 @@ const DetailLapangan = (props) => {
       .get(`http://localhost:3001/lapangan/${id}`)
       .then((res) => {
         console.log("Response data:", res.data.payload);
-        setLapanganDetail(res.data.payload[0]);
+        const detail = res.data.payload[0];
+        setLapanganDetail(detail);
+        setLapanganOptions(
+          Array.from({ length: detail.jumlah_lapangan }, (_, i) => `Lapangan ${i + 1}`)
+        );
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
@@ -203,15 +208,11 @@ const DetailLapangan = (props) => {
                 value={selectedLapangan}
                 onChange={handleLapanganChange}
               >
-                {lapanganDetail.lapanganList ? (
-                  lapanganDetail.lapanganList.map((lapangan, index) => (
-                    <option key={index} value={lapangan}>
-                      {lapangan}
-                    </option>
-                  ))
-                ) : (
-                  <option value="Lapangan 1">Lapangan 1</option>
-                )}
+                {lapanganOptions.map((lapangan, index) => (
+                  <option key={index} value={lapangan}>
+                    {lapangan}
+                  </option>
+                ))}
               </select>
             </label>
           </div>

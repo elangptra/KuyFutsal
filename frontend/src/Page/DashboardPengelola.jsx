@@ -160,11 +160,18 @@ const DashboardPengelola = () => {
         setIsModalOpen(false);
     };
 
-    const handleSaveLapangan = (editedLapangan) => {
-        // Save the edited lapangan (make API call here)
-        setIsModalOpen(false);
-        // Refresh the lapangan data after saving
-        fetchLapanganData(idLapangan);
+    const handleSaveLapangan = async (editedLapangan) => {
+        console.log("Saving Lapangan:", editedLapangan); // Log the data being sent
+        try {
+            const response = await axios.put(`http://localhost:3001/lapangan/dashboard/${idLapangan}`, editedLapangan);
+            console.log("Save Response:", response); // Log the response
+            setIsModalOpen(false);
+            // Refresh the lapangan data after saving
+            fetchLapanganData(idLapangan);
+        } catch (error) {
+            console.error("Error saving lapangan data", error);
+            console.error("Error details:", error.response); // Log the error response
+        }
     };
 
     return (
@@ -190,15 +197,16 @@ const DashboardPengelola = () => {
                                 </div>
                                 <div className="relative flex flex-wrap w-64 h-32 p-4 bg-purple-600 text-white rounded-xl shadow-lg items-center justify-center">
                                     <div className="flex flex-wrap w-16 h-16 rounded-full border-2 items-center justify-center mr-5">
-                                        <NotebookPen className="w-10" alt="icon-booking" />
+                                        <NotebookPen color="white" />
                                     </div>
                                     <div className="flex flex-col">
                                         <h3 className="font-semibold text-2xl text-center">{bookings.length}</h3>
-                                        <h4 className="text-sm text-center">Jumlah Booking</h4>
+                                        <h4 className="text-sm text-center">Total Booking</h4>
                                     </div>
                                 </div>
                             </div>
-                            <table className="w-full table-auto text-white mt-16 rounded-lg overflow-hidden">
+                            <h3 className="text-white font-semibold text-lg mt-10">History Booking</h3>
+                            <table className="w-full table-auto text-white mt-5 rounded-lg overflow-hidden">
                                 <thead className="bg-purple-600">
                                     <tr>
                                         <th className="p-4">Nama Penyewa</th>
