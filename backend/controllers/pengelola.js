@@ -35,3 +35,20 @@ export const getPengelolaByIdPengguna = async (req, res) => {
     console.log(error);
   }
 };
+
+export const getPengelolaLapanganByIdPengguna = async (req, res) => {
+  try {
+    const { id_pengguna } = req.params;
+    const result = await query(
+      `SELECT l.id_lapangan, l.nama_lapangan, u.nama AS nama_pengguna, l.jumlah_lapangan
+      FROM pengelola p
+      JOIN lapangan l ON p.id_lapangan = l.id_lapangan
+      JOIN pengguna u ON p.id_pengguna = u.id_pengguna
+      WHERE p.id_pengguna = ?`,
+      [id_pengguna]
+    );
+    response(200, result, "Success", res);
+  } catch (error) {
+    console.log(error);
+  }
+};

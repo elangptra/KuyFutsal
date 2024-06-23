@@ -30,6 +30,29 @@ export const getBookingById = async (req, res) => {
   }
 };
 
+export const getBookingByIdLapangan = async (req, res) => {
+  try {
+    const { id_lapangan } = req.params;
+    const result = await query(
+      `SELECT
+        p.nama AS nama_pengguna,
+        b.TanggalBooking,
+        b.jam_booking
+      FROM
+        booking b
+      INNER JOIN pengguna p ON b.id_pengguna = p.id_pengguna
+      INNER JOIN lapangan l ON b.id_lapangan = l.id_lapangan
+      WHERE
+        b.id_lapangan = ?`,
+      [id_lapangan]
+    );
+    response(200, result, "Success", res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 export const createBooking = async (req, res) => {
   try {
     const {
