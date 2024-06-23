@@ -3,6 +3,7 @@ import Navbar from "../components/elements/navbar/navbar";
 import Footer from "../components/elements/footer";
 import { NotebookPen, Pencil } from "lucide-react";
 import axios from "axios";
+import LapanganModal from '../components/elements/lapanganmodal';
 
 const DashboardPengelola = () => {
     const [namaLapangan, setNamaLapangan] = useState('');
@@ -12,6 +13,15 @@ const DashboardPengelola = () => {
     const [bookings, setBookings] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [lapanganData, setLapanganData] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedLapangan, setSelectedLapangan] = useState({
+        nama_lapangan: '',
+        harga: '',
+        jumlah_lapangan: '',
+        alamat: '',
+        jam_buka: '',
+        jam_tutup: '',
+    });
     const itemsPerPage = 10;
 
     useEffect(() => {
@@ -134,13 +144,32 @@ const DashboardPengelola = () => {
         setSearchResult(user ? user.imageUrl : null);
     };
 
+    const handleEditClick = (lapangan) => {
+        setSelectedLapangan(lapangan || {
+            nama_lapangan: '',
+            harga: '',
+            jumlah_lapangan: '',
+            alamat: '',
+            jam_buka: '',
+            jam_tutup: '',
+        });
+        setIsModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleSaveLapangan = (editedLapangan) => {
+        // Save the edited lapangan (make API call here)
+        setIsModalOpen(false);
+        // Refresh the lapangan data after saving
+        fetchLapanganData(idLapangan);
+    };
+
     return (
         <div className="top-0 bg-[#171830]">
-            {/* Navbar Start */}
             <Navbar />
-            {/* Navbar End */}
-
-            {/* Body Start */}
             <div className="container">
                 <div className="py-16">
                     <div className="flex flex-wrap justify-between">
@@ -253,7 +282,10 @@ const DashboardPengelola = () => {
                                     <td className="p-2">{lapangan.jam_buka}</td>
                                     <td className="p-2">{lapangan.jam_tutup}</td>
                                     <td className="p-2">
-                                        <button className="bg-yellow-500 rounded-lg p-2 hover:bg-yellow-300">
+                                        <button
+                                            className="bg-yellow-500 rounded-lg p-2 hover:bg-yellow-300"
+                                            onClick={() => handleEditClick(lapangan)}
+                                        >
                                             <Pencil />
                                         </button>
                                     </td>
@@ -263,11 +295,13 @@ const DashboardPengelola = () => {
                     </table>
                 </div>
             </div>
-            {/* Body End */}
-
-            {/* Footer Start */}
             <Footer />
-            {/* Footer End */}
+            <LapanganModal
+                isOpen={isModalOpen}
+                onClose={handleModalClose}
+                lapangan={selectedLapangan}
+                onSave={handleSaveLapangan}
+            />
         </div>
     );
 };
