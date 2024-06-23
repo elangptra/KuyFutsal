@@ -1,14 +1,13 @@
 import express from "express";
-import { getPengelola, getPengelolaById, createPengelola } from "../controllers/pengelola.js";
+import { getPengelola, getPengelolaById, getPengelolaByIdPengguna } from "../controllers/pengelola.js";
 
 
 const router = express.Router();
 
+router.get("/pengelola/pengguna/:id_pengguna", getPengelolaByIdPengguna);
+
 router.get("/pengelola", getPengelola);
 
 router.get("/pengelola/:id_pengelola", getPengelolaById);
-
-router.post("/pengelola", createPengelola);
-
 
 export default router
