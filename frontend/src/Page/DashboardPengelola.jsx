@@ -11,6 +11,7 @@ const DashboardPengelola = () => {
     const [idLapangan, setIdLapangan] = useState(null);
     const [bookings, setBookings] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [lapanganData, setLapanganData] = useState([]);
     const itemsPerPage = 10;
 
     useEffect(() => {
@@ -38,13 +39,13 @@ const DashboardPengelola = () => {
         try {
             const response = await axios.get(`http://localhost:3001/pengelola/lapangan/${id_pengguna}`);
             const data = response.data.payload;
-            // console.log("Fetched Data:", data); // Add this line to log fetched data
             if (data && data.length > 0) {
                 setNamaLapangan(data[0].nama_lapangan);
                 setNamaPengguna(data[0].nama_pengguna);
                 setJumlahLapangan(data[0].jumlah_lapangan);
                 setIdLapangan(data[0].id_lapangan);
                 fetchBookings(data[0].id_lapangan);
+                fetchLapanganData(data[0].id_lapangan);
             }
         } catch (error) {
             console.error("Error fetching user data", error);
@@ -58,6 +59,16 @@ const DashboardPengelola = () => {
             setBookings(data);
         } catch (error) {
             console.error("Error fetching bookings", error);
+        }
+    };
+
+    const fetchLapanganData = async (id_lapangan) => {
+        try {
+            const response = await axios.get(`http://localhost:3001/lapangan/dashboard/${id_lapangan}`);
+            const data = response.data.payload;
+            setLapanganData(data);
+        } catch (error) {
+            console.error("Error fetching lapangan data", error);
         }
     };
 
@@ -233,19 +244,21 @@ const DashboardPengelola = () => {
                             </tr>
                         </thead>
                         <tbody className="bg-white text-black text-center">
-                            <tr>
-                                <td className="p-2">Ini buat nama lapangan</td>
-                                <td className="p-2">Rp. 500.000<span>/sesi</span></td>
-                                <td className="p-2">1</td>
-                                <td className="p-2">Batuceper, Kota Tangerang, Banten</td>
-                                <td className="p-2">08:00</td>
-                                <td className="p-2">23:00</td>
-                                <td className="p-2">
-                                    <button className="bg-yellow-500 rounded-lg p-2 hover:bg-yellow-300">
-                                        <Pencil />
-                                    </button>
-                                </td>
-                            </tr>
+                            {lapanganData.map((lapangan, index) => (
+                                <tr key={index}>
+                                    <td className="p-2">{lapangan.nama_lapangan}</td>
+                                    <td className="p-2">Rp. {lapangan.harga}<span>/sesi</span></td>
+                                    <td className="p-2">{lapangan.jumlah_lapangan}</td>
+                                    <td className="p-2">{lapangan.alamat}</td>
+                                    <td className="p-2">{lapangan.jam_buka}</td>
+                                    <td className="p-2">{lapangan.jam_tutup}</td>
+                                    <td className="p-2">
+                                        <button className="bg-yellow-500 rounded-lg p-2 hover:bg-yellow-300">
+                                            <Pencil />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

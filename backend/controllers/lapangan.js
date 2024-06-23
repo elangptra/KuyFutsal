@@ -29,6 +29,27 @@ export const getLapanganById = async (req, res) => {
   }
 };
 
+export const getLapanganDashboardById = async (req, res) => {
+  try {
+    const { id_lapangan } = req.params;
+    const result = await query(
+      `SELECT
+        nama_lapangan,
+        harga,
+        jumlah_lapangan,
+        alamat,
+        jam_buka,
+        jam_tutup
+      FROM
+        lapangan
+      WHERE
+        id_lapangan = ?`, [id_lapangan,]);
+    response(200, result, "Success", res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createLapangan = async (req, res) => {
   try {
     const {
