@@ -5,14 +5,26 @@ const ChatSection = ({ messages, onSendMessage }) => {
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef(null);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue.trim()) {
       const userMessage = { text: inputValue, user: true };
       onSendMessage(userMessage);
+      const response = await fetch(
+        "https://flask-docker.1igtm4p88ry2.us-south.codeengine.appdomain.cloud/chatbot",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: inputValue }),
+        }
+      );
+      const data = await response.json();
+
       setInputValue("");
 
       // Simulate bot response
-      const botResponse = { text: "Ini adalah respons bot 😋", user: false };
+      const botResponse = { text: data.response, user: false };
       onSendMessage(botResponse);
     }
   };
