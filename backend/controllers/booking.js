@@ -108,3 +108,20 @@ export const getBookingByIdPengguna = async (req, res)=>{
     console.log(error);
   }
 }
+
+export const getBookingByIdPenggunaDesc = async (req, res)=>{
+  try {
+    const { id_pengguna } = req.params;
+    const result = await query(
+      `SELECT *
+      FROM
+        booking
+      WHERE
+        id_pengguna = ? ORDER BY id_booking DESC`,
+      [id_pengguna]
+    );
+    response(200, result, "Success", res);
+  } catch (error) {
+    console.log(error);
+  }
+}
