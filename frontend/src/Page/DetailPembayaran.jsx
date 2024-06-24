@@ -22,6 +22,9 @@ const DetailPembayaran = () => {
   const [idBooking, setIdBooking] = useState(""); // State untuk id_booking
   const [idPengguna, setIdPengguna] = useState(""); // State untuk id_pengguna
   const [hargaLapangan, setHargaLapangan] = useState(0); // State untuk harga lapangan
+  const [pembayaranData, setPembayaranData] = useState(null);
+
+  const adminFee = 2500.0;
 
   const mitraCodes = {
     bca: "12345",
@@ -69,6 +72,7 @@ const DetailPembayaran = () => {
         setIdPengguna(user.id_pengguna); // Set id_pengguna
         fetchUserData(user.id_pengguna);
         fetchBookingData(user.id_pengguna); // Fetch booking data based on id_pengguna
+        fetchPembayaranData(user.id_pengguna);
       } catch (error) {
         console.error("Invalid token");
       }
@@ -123,7 +127,9 @@ const DetailPembayaran = () => {
 
   const fetchBookingData = async (id_pengguna) => {
     try {
-      const response = await axios.get(`http://localhost:3001/booking/pengguna/${id_pengguna}`);
+      const response = await axios.get(
+        `http://localhost:3001/booking/pengguna/${id_pengguna}`
+      );
       const bookingData = response.data.payload[0];
       setIdBooking(bookingData.id_booking);
       setHargaLapangan(bookingData.harga);
@@ -132,19 +138,36 @@ const DetailPembayaran = () => {
     }
   };
 
+  const fetchPembayaranData = async (id_pengguna) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/pembayaran/pengguna/${id_pengguna}`
+      );
+      const pembayaranData = response.data.payload[0];
+      setPembayaranData(pembayaranData);
+    } catch (error) {
+      console.error("Error fetching payment data:", error);
+    }
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     window.location.reload(); // Refresh the website
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('id-ID', options);
+  };
+  
+
   const handlePayment = () => {
-    const adminFee = 2500;
-    const total = hargaLapangan + adminFee;
+    const total = (parseFloat(hargaLapangan) * 100 + adminFee * 100) / 100;
 
     const paymentData = {
       metode_bayar: selectedOption,
       virtual_account: mitraCode + inputNoTelp,
-      total: total,
+      total: total.toFixed(2),
       id_booking: idBooking,
       id_pengguna: idPengguna,
     };
@@ -155,7 +178,8 @@ const DetailPembayaran = () => {
         console.log("Payment data saved:", response.data);
         console.log("Booking successful:", response.data);
         // Redirect ke halaman pembayaran
-        window.location.href = "/virtualAccount/" + response.data.payload.insertId;
+        window.location.href =
+          "/virtualAccount/" + response.data.payload.insertId;
         setModalType("success"); // Set modal type to success
         setModalVisible(true); // Show the modal
       })
@@ -166,6 +190,8 @@ const DetailPembayaran = () => {
         setModalVisible(true); // Show the modal
       });
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="top-0 bg-[#171830]">
@@ -257,7 +283,9 @@ const DetailPembayaran = () => {
 
             <div className="bg-white rounded-lg p-5 mt-6">
               <div>
-                <h3 className="font-semibold text-2xl m-2">Detail Pembayaran</h3>
+                <h3 className="font-semibold text-2xl m-2">
+                  Detail Pembayaran
+                </h3>
               </div>
               <div className="border-t-2 border-dashed border-black m-2"></div>
               <div className="py-1">
@@ -315,33 +343,47 @@ const DetailPembayaran = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-700 font-semibold">Jam Main</p>
-                    <p className="text-gray-500">08:00 - 09:00 WIB</p>
+                    <p className="text-gray-500">{pembayaranData?.jam_booking}</p>
                   </div>
                   <div>
                     <p className="text-gray-700 font-semibold">Harga</p>
-                    <p className="text-gray-500">Rp. {hargaLapangan}</p>
+                    <p className="text-gray-500">
+                      Rp. {new Intl.NumberFormat("id-ID").format(hargaLapangan)}
+                    </p>
                   </div>
                 </div>
                 <div className="border-t-2 border-dashed border-black m-2"></div>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-700 font-semibold">Lama Sewa</p>
-                    <p className="text-gray-500">1 Jam</p>
+                    <p className="text-gray-500 ps-2">{parseInt(pembayaranData?.durasi)}</p>
                   </div>
                   <div>
                     <p className="text-gray-700 font-semibold">Total</p>
-                    <p className="text-gray-500">Rp. {hargaLapangan + 2500}</p>
+                    <p className="text-gray-500">
+                      {new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 2,
+                      }).format(
+                        (
+                          (parseFloat(hargaLapangan) * 100 + adminFee * 100) /
+                          100
+                        ).toFixed(2)
+                      )}
+                    </p>
                   </div>
                 </div>
                 <div className="border-t-2 border-dashed border-black m-2"></div>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-700 font-semibold">Lokasi</p>
-                    <p className="text-gray-500">Lapangan A</p>
+                    <p className="text-gray-500">Lapangan {pembayaranData?.nomor_lapangan}</p>
                   </div>
                   <div>
                     <p className="text-gray-700 font-semibold">Tanggal</p>
-                    <p className="text-gray-500">25 Juni 2024</p>
+                    <p className="text-gray-500">{formatDate(pembayaranData?.TanggalBooking)}</p>
                   </div>
                 </div>
               </div>
@@ -356,7 +398,8 @@ const DetailPembayaran = () => {
                   pemesanan. Jika tidak, pemesanan akan otomatis dibatalkan.
                 </p>
                 <p className="text-gray-500 mt-3">
-                  Untuk pertanyaan lebih lanjut, hubungi kami di support@lapangan.com
+                  Untuk pertanyaan lebih lanjut, hubungi kami di
+                  support@lapangan.com
                 </p>
               </div>
             </div>

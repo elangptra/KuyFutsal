@@ -15,7 +15,7 @@ export const getPembayaranById = async (req, res) => {
   try {
     const { id_pembayaran } = req.params;
     const result = await query(
-      `SELECT * FROM pembayaran WHERE id_pembayaran = ?`,
+      `SELECT virtual_account, total FROM pembayaran WHERE id_pembayaran = ?`,
       [id_pembayaran]
     );
     if (result.length === 0) {
@@ -50,8 +50,7 @@ export const getPembayaranByIdPengguna = async (req, res) => {
         b.TanggalBooking,
         b.nomor_lapangan,
         b.harga,
-        b.durasi,
-        pm.total
+        b.durasi
       FROM
         pembayaran pm
       INNER JOIN pengguna p ON pm.id_pengguna = p.id_pengguna

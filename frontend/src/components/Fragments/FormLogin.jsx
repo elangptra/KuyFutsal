@@ -35,6 +35,7 @@ const FormLogin = () => {
       localStorage.setItem('isAdmin', isAdmin);
 
       window.location.href = '/homePage';
+      alert('Login Berhasil');
     } catch (err) {
       setError('Login failed. Please check your username and password.');
       console.error('Error logging in:', err);

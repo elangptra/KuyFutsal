@@ -6,6 +6,6 @@ const router = express.Router();
 router.get('/pembayaran', getPembayaran);
 router.get('/pembayaran/:id_pembayaran', getPembayaranById);
 router.post('/pembayaran', createPembayaran);
-router.get('/pembayaran/:id_pengguna', getPembayaranByIdPengguna);
+router.get('/pembayaran/pengguna/:id_pengguna', getPembayaranByIdPengguna);
 
 export default router
