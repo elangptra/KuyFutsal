@@ -141,9 +141,10 @@ const DetailPembayaran = () => {
   const fetchPembayaranData = async (id_pengguna) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/pembayaran/pengguna/${id_pengguna}`
+        `http://localhost:3001/booking/pengguna/desc/${id_pengguna}`
       );
-      const pembayaranData = response.data.payload[0];
+      console.log(response.data.payload);
+      const pembayaranData = response.data.payload[0]; // Access the first object in the array
       setPembayaranData(pembayaranData);
     } catch (error) {
       console.error("Error fetching payment data:", error);
@@ -343,7 +344,7 @@ const DetailPembayaran = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-700 font-semibold">Jam Main</p>
-                    <p className="text-gray-500">{pembayaranData?.jam_booking}</p>
+                    <p className="text-gray-500">{ pembayaranData?.jam_booking}</p>
                   </div>
                   <div>
                     <p className="text-gray-700 font-semibold">Harga</p>
