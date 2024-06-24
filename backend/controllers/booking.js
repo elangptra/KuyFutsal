@@ -89,3 +89,20 @@ export const createBooking = async (req, res) => {
     response(500, null, "Internal Server Error", res);
   }
 };
+
+export const getBookingByIdPengguna = async (req, res)=>{
+  try {
+    const { id_pengguna } = req.params;
+    const result = await query(
+      `SELECT *
+      FROM
+        booking
+      WHERE
+        id_pengguna = ?`,
+      [id_pengguna]
+    );
+    response(200, result, "Success", res);
+  } catch (error) {
+    console.log(error);
+  }
+}

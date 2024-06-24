@@ -43,11 +43,18 @@ const EditProfile = () => {
       setInputNama(userData.nama);
       setInputEmail(userData.email);
       setInputNoTelp(userData.no_telp);
+      const userDataWithDefaults = {
+        ...userData,
+        fotoUrl:
+          "/images/profile/" + userData.foto || "/images/profile/avatar.jpeg",
+      };
+      setUser(userDataWithDefaults);
     } catch (error) {
       console.error("Error fetching user data:", error);
       setError("Failed to fetch user data");
     }
   };
+
 
   const handleEditProfile = (event) => {
     event.preventDefault();
@@ -100,7 +107,7 @@ const EditProfile = () => {
           <div className="w-full flex flex-wrap items-center -mt-24 justify-between">
             <div className="flex flex-wrap text-white items-center">
               <img
-                src={user?.foto || "/images/profile/avatar.jpeg"}
+                src={user?.fotoUrl || "/images/profile/avatar.jpeg"}
                 className="w-[130px] h-[130px] rounded-full mr-10"
                 alt="avatar-icon"
               />
