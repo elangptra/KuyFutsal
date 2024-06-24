@@ -8,28 +8,44 @@ import Modal from "../components/elements/modal";
 
 const VirtualAccount = () => {
   const { id_pembayaran } = useParams();
-  const [time, setTime] = useState("");
+  const [deadline, setDeadline] = useState(null);
+  const [countdown, setCountdown] = useState("");
   const [paymentData, setPaymentData] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState("");
 
   useEffect(() => {
-    // Check if the initial time is already stored in localStorage
-    const storedTime = localStorage.getItem("initialTime");
+    // Check if the deadline is already stored in localStorage
+    let storedDeadline = localStorage.getItem(`paymentDeadline-${id_pembayaran}`);
 
-    let initialTime;
-    if (storedTime) {
-      initialTime = new Date(storedTime);
-    } else {
-      initialTime = new Date();
+    if (!storedDeadline) {
+      // Calculate one hour from now
+      const initialTime = new Date();
       initialTime.setHours(initialTime.getHours() + 1);
-      localStorage.setItem("initialTime", initialTime);
+      storedDeadline = initialTime.toISOString();
+      localStorage.setItem(`paymentDeadline-${id_pembayaran}`, storedDeadline);
     }
 
-    const hours = initialTime.getHours().toString().padStart(2, "0");
-    const minutes = initialTime.getMinutes().toString().padStart(2, "0");
-    setTime(`${hours}:${minutes}`);
-  }, []);
+    setDeadline(new Date(storedDeadline));
+
+    // Update countdown every second
+    const countdownInterval = setInterval(() => {
+      const now = new Date();
+      const timeLeft = new Date(storedDeadline) - now;
+
+      if (timeLeft <= 0) {
+        clearInterval(countdownInterval);
+        setCountdown("00:00:00");
+      } else {
+        const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60)).toString().padStart(2, "0");
+        const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, "0");
+        const secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000).toString().padStart(2, "0");
+        setCountdown(`${hoursLeft}:${minutesLeft}:${secondsLeft}`);
+      }
+    }, 1000);
+
+    return () => clearInterval(countdownInterval);
+  }, [id_pembayaran]);
 
   const openModal = (type) => (event) => {
     event.preventDefault();
@@ -46,7 +62,7 @@ const VirtualAccount = () => {
       .get(`http://localhost:3001/pembayaran/${id_pembayaran}`)
       .then((response) => {
         console.log("API Response:", response.data.payload); // Debugging
-        setPaymentData(response.data.payload);
+        setPaymentData(response.data.payload[0]); // Assuming payload is an array
       })
       .catch((error) => {
         console.error("There was an error!", error);
@@ -71,10 +87,13 @@ const VirtualAccount = () => {
                 </h1>
                 <h3 className="text-base m-1">Total Pembayaran:</h3>
                 <h3 className="font-semibold text-lg m-1">
-                  Rp {paymentData.total}
+                  Rp {new Intl.NumberFormat("id-ID", { minimumFractionDigits: 0 }).format(paymentData.total)}
                 </h3>
                 <h3 className="text-base m-10">
-                  Silahkan untuk melakukan pembayaran sebelum pukul {time}
+                  Silahkan untuk melakukan pembayaran sebelum pukul {new Date(deadline).toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' })}
+                </h3>
+                <h3 className="text-base m-10">
+                  Waktu tersisa: {countdown}
                 </h3>
                 <Button
                   onClick={openModal("success-verif")}

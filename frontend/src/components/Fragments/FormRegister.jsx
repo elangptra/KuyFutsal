@@ -42,6 +42,9 @@ const FormRegister = () => {
       })
       .then((response) => {
         console.log(response.data);
+
+        window.location.href = "/login";
+        alert("Registrasi Berhasil");
       })
       .catch((error) => {
         console.error("There was an error with the request:", error);
