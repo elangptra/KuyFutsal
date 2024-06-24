@@ -27,25 +27,28 @@ const VirtualAccount = () => {
     }
 
     setDeadline(new Date(storedDeadline));
+  }, [id_pembayaran]);
 
-    // Update countdown every second
+  useEffect(() => {
     const countdownInterval = setInterval(() => {
-      const now = new Date();
-      const timeLeft = new Date(storedDeadline) - now;
+      if (deadline) {
+        const now = new Date();
+        const timeLeft = deadline - now;
 
-      if (timeLeft <= 0) {
-        clearInterval(countdownInterval);
-        setCountdown("00:00:00");
-      } else {
-        const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60)).toString().padStart(2, "0");
-        const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, "0");
-        const secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000).toString().padStart(2, "0");
-        setCountdown(`${hoursLeft}:${minutesLeft}:${secondsLeft}`);
+        if (timeLeft <= 0) {
+          clearInterval(countdownInterval);
+          setCountdown("00:00:00");
+        } else {
+          const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60)).toString().padStart(2, "0");
+          const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, "0");
+          const secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000).toString().padStart(2, "0");
+          setCountdown(`${hoursLeft}:${minutesLeft}:${secondsLeft}`);
+        }
       }
     }, 1000);
 
     return () => clearInterval(countdownInterval);
-  }, [id_pembayaran]);
+  }, [deadline]);
 
   const openModal = (type) => (event) => {
     event.preventDefault();
@@ -90,7 +93,7 @@ const VirtualAccount = () => {
                   Rp {new Intl.NumberFormat("id-ID", { minimumFractionDigits: 0 }).format(paymentData.total)}
                 </h3>
                 <h3 className="text-base m-10">
-                  Silahkan untuk melakukan pembayaran sebelum pukul {new Date(deadline).toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' })}
+                  Silahkan untuk melakukan pembayaran sebelum pukul {deadline ? new Date(deadline).toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' }) : "Loading..."}
                 </h3>
                 <h3 className="text-base m-10">
                   Waktu tersisa: {countdown}

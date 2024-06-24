@@ -43,7 +43,7 @@ export const createPembayaran = async (req, res) => {
 
 export const getPembayaranByIdPengguna = async (req, res) => {
   try {
-    const { id_booking } = req.params;
+    const { id_pengguna } = req.params;
     const result = await query(
       `SELECT
         b.id_booking,
@@ -56,9 +56,9 @@ export const getPembayaranByIdPengguna = async (req, res) => {
         pembayaran pm
       INNER JOIN pengguna p ON pm.id_pengguna = p.id_pengguna
       INNER JOIN booking b ON pm.id_pengguna = b.id_pengguna
-      WHERE b.id_booking = ? `,
+      WHERE pm.id_pengguna = ?`,
 
-      [id_booking]
+      [id_pengguna]
     );
     response(200, result, "Success", res);
   } catch (error) {
