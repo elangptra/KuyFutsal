@@ -1,9 +1,8 @@
-import Button from "../elements/button";
-import Input from "../elements/input";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { X, Camera } from "lucide-react";
-import React, { useState } from "react";
 import axios from "axios";
+import Button from "../elements/button";
 
 const FormRegister = () => {
   const [foto, setFoto] = useState(null);
@@ -16,6 +15,12 @@ const FormRegister = () => {
 
   const handleRegister = (event) => {
     event.preventDefault();
+
+    if (!nama || !email || !password || !confirmPassword || !no_telp) {
+      setError("Semua field harus diisi");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Password dan konfirmasi password tidak cocok");
       return;
@@ -25,6 +30,7 @@ const FormRegister = () => {
     formData.append("nama", nama);
     formData.append("email", email);
     formData.append("password", password);
+    formData.append("confirmPassword", confirmPassword); // Pastikan ini ditambahkan
     formData.append("no_telp", no_telp);
     formData.append("foto", foto);
 
@@ -35,11 +41,11 @@ const FormRegister = () => {
         },
       })
       .then((response) => {
-        
-        console.log(response);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("There was an error with the request:", error);
+        setError("Terjadi kesalahan saat registrasi");
       });
   };
 
