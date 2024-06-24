@@ -83,8 +83,9 @@ const Navlink = () => {
       const userData = response.data.payload[0];
       const userDataWithDefaults = {
         ...userData,
-        fotoUrl:
-          "/images/profile/" + userData.foto || "/images/profile/avatar.jpeg",
+        fotoUrl: userData.foto
+          ? `/images/profile/${userData.foto}`
+          : "/images/profile/avatar.jpeg",
       };
 
       setUser(userDataWithDefaults);
