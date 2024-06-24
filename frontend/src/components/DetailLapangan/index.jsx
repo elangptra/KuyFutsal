@@ -12,7 +12,7 @@ const DetailLapangan = (props) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTimes, setSelectedTimes] = useState([]); // Array for selected times
   const [userId, setUserId] = useState(null); // ID pengguna yang sedang login
-  const [selectedLapangan, setSelectedLapangan] = useState("");
+  const [selectedLapangan, setSelectedLapangan] = useState(""); // Set default value to an empty string
   const [lapanganOptions, setLapanganOptions] = useState([]); // State for lapangan options
   const [errorMessage, setErrorMessage] = useState(""); // State for error message
   const [isLoginRequiredModalOpen, setIsLoginRequiredModalOpen] = useState(false);
@@ -81,8 +81,15 @@ const DetailLapangan = (props) => {
       return;
     }
 
-    if (!selectedDate || selectedTimes.length === 0) {
-      setErrorMessage("Tanggal dan Jam harus diisi untuk melakukan booking.");
+    if (!selectedDate || selectedTimes.length === 0 || !selectedLapangan) {
+      setErrorMessage("Tanggal, Lapangan, dan Jam harus diisi untuk melakukan booking.");
+      setIsValidationErrorModalOpen(true);
+      return;
+    }
+
+    const nomorLapangan = parseInt(selectedLapangan.replace("Lapangan ", ""));
+    if (isNaN(nomorLapangan)) {
+      setErrorMessage("Nomor Lapangan tidak valid.");
       setIsValidationErrorModalOpen(true);
       return;
     }
@@ -91,7 +98,7 @@ const DetailLapangan = (props) => {
       TanggalBooking: selectedDate,
       jam_booking: selectedTimes.join(", "),
       durasi: `${selectedTimes.length}:00`, // Duration based on selected time slots
-      nomor_lapangan: parseInt(selectedLapangan.replace("Lapangan ", "")),
+      nomor_lapangan: nomorLapangan,
       harga: calculateTotalPrice(),
       id_lapangan: id,
       id_pengguna: userId,
@@ -208,6 +215,7 @@ const DetailLapangan = (props) => {
                 value={selectedLapangan}
                 onChange={handleLapanganChange}
               >
+                <option value="">Pilih Lapangan</option>
                 {lapanganOptions.map((lapangan, index) => (
                   <option key={index} value={lapangan}>
                     {lapangan}
