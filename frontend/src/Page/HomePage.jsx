@@ -50,9 +50,8 @@ const HomePage = (props) => {
   };
 
   const handleSendMessage = (message) => {
-    setMessages([...messages, { text: message, user: true }]);
+    setMessages((prevMessages) => [...prevMessages, message]);
   };
-
 
   return (
     <>

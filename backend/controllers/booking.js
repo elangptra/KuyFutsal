@@ -38,12 +38,14 @@ export const getBookingByIdLapangan = async (req, res) => {
         p.nama AS nama_pengguna,
         b.TanggalBooking,
         b.jam_booking
-      FROM
+    FROM
         booking b
-      INNER JOIN pengguna p ON b.id_pengguna = p.id_pengguna
-      INNER JOIN lapangan l ON b.id_lapangan = l.id_lapangan
-      WHERE
-        b.id_lapangan = ?`,
+    INNER JOIN pengguna p ON b.id_pengguna = p.id_pengguna
+    INNER JOIN lapangan l ON b.id_lapangan = l.id_lapangan
+    WHERE
+        b.id_lapangan = ?
+    ORDER BY
+      b.TanggalBooking DESC`,
       [id_lapangan]
     );
     response(200, result, "Success", res);

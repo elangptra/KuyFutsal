@@ -45,8 +45,9 @@ const EditProfile = () => {
       setInputNoTelp(userData.no_telp);
       const userDataWithDefaults = {
         ...userData,
-        fotoUrl:
-          "/images/profile/" + userData.foto || "/images/profile/avatar.jpeg",
+        fotoUrl: userData.foto
+          ? `/images/profile/${userData.foto}`
+          : "/images/profile/avatar.jpeg",
       };
       setUser(userDataWithDefaults);
     } catch (error) {
@@ -54,7 +55,6 @@ const EditProfile = () => {
       setError("Failed to fetch user data");
     }
   };
-
 
   const handleEditProfile = (event) => {
     event.preventDefault();
@@ -184,7 +184,7 @@ const EditProfile = () => {
       <Footer />
       <SimpleModal
         isOpen={isModalOpen}
-        image= "/images/icons/success-icon.png"
+        image="/images/icons/success-icon.png"
         message="Profile updated successfully!"
         onClose={handleCloseModal}
       />
