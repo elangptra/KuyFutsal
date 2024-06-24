@@ -60,7 +60,7 @@ const router = createBrowserRouter([
     element: <PageDetailLapangan />,
   },
   {
-    path: "/VirtualAccount",
+    path: "/VirtualAccount/:id_pembayaran",
     element: <VirtualAccount />,
   },
   {

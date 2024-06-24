@@ -59,13 +59,13 @@ const Navlink = () => {
 
     if (token) {
       try {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
         const jsonPayload = decodeURIComponent(
           atob(base64)
-            .split('')
-            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-            .join('')
+            .split("")
+            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+            .join("")
         );
         const user = JSON.parse(jsonPayload).user;
         fetchUserData(user.id_pengguna);
@@ -77,12 +77,16 @@ const Navlink = () => {
 
   const fetchUserData = async (id_pengguna) => {
     try {
-      const response = await axios.get(`http://localhost:3001/pengguna/${id_pengguna}`);
+      const response = await axios.get(
+        `http://localhost:3001/pengguna/${id_pengguna}`
+      );
       const userData = response.data.payload[0];
       const userDataWithDefaults = {
         ...userData,
-        fotoUrl: userData.foto || "/images/profile/avatar.jpeg",
+        fotoUrl:
+          "/images/profile/" + userData.foto || "/images/profile/avatar.jpeg",
       };
+
       setUser(userDataWithDefaults);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -92,7 +96,10 @@ const Navlink = () => {
   const displayUser = () => {
     if (user) {
       return (
-        <div className="flex items-center cursor-pointer mt-2" onClick={toggleDropdown}>
+        <div
+          className="flex items-center cursor-pointer mt-2"
+          onClick={toggleDropdown}
+        >
           <img
             src={user.fotoUrl}
             alt="Foto Pengguna"
@@ -117,7 +124,11 @@ const Navlink = () => {
     <>
       <nav className="w-full flex items-center justify-end">
         <div className="w-full items-center justify-between md:flex">
-          <img src="/images/icons/logo.png" alt="" className="h-16 mt-3 block" />
+          <img
+            src="/images/icons/logo.png"
+            alt=""
+            className="h-16 mt-3 block"
+          />
           <div className="hidden md:block">
             <Links />
           </div>

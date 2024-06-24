@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/elements/navbar/navbar";
 import Footer from "../components/elements/footer";
 import Button from "../components/elements/button";
 import Input from "../components/elements/input";
-import { Link } from "react-router-dom";
-import { Camera } from "lucide-react";
-import { useState, useEffect } from "react";
 import Modal from "../components/elements/modal";
-import UploadPhotoButton from "../components/uploadPhotoButton";
 import axios from "axios";
-
+import SimpleModal from "../components/elements/simplemodal";
 
 const DetailPembayaran = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  
+  const [user, setUser] = useState(null);
+  const [inputNama, setInputNama] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputNoTelp, setInputNoTelp] = useState("");
+  const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mitraCode, setMitraCode] = useState("");
+
+  const [idBooking, setIdBooking] = useState(""); // State untuk id_booking
+  const [idPengguna, setIdPengguna] = useState(""); // State untuk id_pengguna
+  const [hargaLapangan, setHargaLapangan] = useState(0); // State untuk harga lapangan
+
+  const mitraCodes = {
+    bca: "12345",
+    bni: "67890",
+    mandiri: "11223",
+    gopay: "44556",
+    dana: "77889",
+  };
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
+    setMitraCode(mitraCodes[option]);
   };
 
   const toggleDropdown = () => {
@@ -36,6 +51,120 @@ const DetailPembayaran = () => {
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+            .join("")
+        );
+        const user = JSON.parse(jsonPayload).user;
+        setIdPengguna(user.id_pengguna); // Set id_pengguna
+        fetchUserData(user.id_pengguna);
+        fetchBookingData(user.id_pengguna); // Fetch booking data based on id_pengguna
+      } catch (error) {
+        console.error("Invalid token");
+      }
+    }
+  }, []);
+
+  const fetchUserData = async (id_pengguna) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/pengguna/${id_pengguna}`
+      );
+      const userData = response.data.payload[0];
+      setUser(userData);
+      setInputNama(userData.nama);
+      setInputEmail(userData.email);
+      setInputNoTelp(userData.no_telp);
+      const userDataWithDefaults = {
+        ...userData,
+        fotoUrl:
+          "/images/profile/" + userData.foto || "/images/profile/avatar.jpeg",
+      };
+      setUser(userDataWithDefaults);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setError("Failed to fetch user data");
+    }
+  };
+
+  const handleEditProfile = (event) => {
+    event.preventDefault();
+
+    axios
+      .put(`http://localhost:3001/pengguna/${user.id_pengguna}`, {
+        nama: inputNama,
+        email: inputEmail,
+        no_telp: inputNoTelp,
+      })
+      .then((response) => {
+        setUser({
+          ...user,
+          nama: inputNama,
+          email: inputEmail,
+          no_telp: inputNoTelp,
+        });
+        setIsModalOpen(true);
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const fetchBookingData = async (id_pengguna) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/booking/pengguna/${id_pengguna}`);
+      const bookingData = response.data.payload[0];
+      setIdBooking(bookingData.id_booking);
+      setHargaLapangan(bookingData.harga);
+    } catch (error) {
+      console.error("Error fetching booking data:", error);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    window.location.reload(); // Refresh the website
+  };
+
+  const handlePayment = () => {
+    const adminFee = 2500;
+    const total = hargaLapangan + adminFee;
+
+    const paymentData = {
+      metode_bayar: selectedOption,
+      virtual_account: mitraCode + inputNoTelp,
+      total: total,
+      id_booking: idBooking,
+      id_pengguna: idPengguna,
+    };
+
+    axios
+      .post(`http://localhost:3001/pembayaran`, paymentData)
+      .then((response) => {
+        console.log("Payment data saved:", response.data);
+        console.log("Booking successful:", response.data);
+        // Redirect ke halaman pembayaran
+        window.location.href = "/virtualAccount/" + response.data.payload.insertId;
+        setModalType("success"); // Set modal type to success
+        setModalVisible(true); // Show the modal
+      })
+      .catch((error) => {
+        console.error("Error saving payment data:", error);
+        // Bisa tambahkan logika untuk notifikasi error
+        setModalType("error"); // Set modal type to error
+        setModalVisible(true); // Show the modal
+      });
   };
 
   return (
@@ -59,31 +188,31 @@ const DetailPembayaran = () => {
               </div>
               <div className="border-t-2 border-dashed border-black m-2"></div>
               <div className="py-1">
-                <p className="text-base mb-3">
-                  Sudah punya akun?
-                  <Link to="/Login" className="text-blue-500 hover:opacity-70">
-                    Masuk disini
-                  </Link>
-                </p>
-
-                <form>
+                <form onSubmit={handleEditProfile}>
                   <div className="flex flex-wrap justify-between">
                     <div className="w-[49%]">
-                      <input 
-                        type="text" 
-                        name="nama" 
-                        placeholder="Nama Lengkap" 
+                      <input
+                        type="text"
+                        name="nama"
+                        value={inputNama}
+                        onChange={(e) => setInputNama(e.target.value)}
+                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
+                        placeholder="Masukkan Nama Anda"
+                      />
+                      <input
+                        type="text"
+                        name="no_telp"
+                        value={inputNoTelp}
+                        onChange={(e) => setInputNoTelp(e.target.value)}
+                        placeholder="Nomor Telepon"
                         className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
                       />
-                      <input 
-                        type="text" 
-                        name="no_telp" 
-                        placeholder="Nomor Telepon" 
-                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black" 
-                      />
                       <div className="flex flex-col text-center items-center justify-center border p-10 border-black rounded-md bg-slate-400">
-                        <UploadPhotoButton />
-                        
+                        <img
+                          src={user?.fotoUrl || "/images/profile/avatar.jpeg"}
+                          className="m-10"
+                          alt="avatar-icon"
+                        />
                       </div>
                       <div className="border border-black rounded-md bg-transparent mt-5">
                         <p className="text-base p-2">
@@ -93,23 +222,13 @@ const DetailPembayaran = () => {
                       </div>
                     </div>
                     <div className="w-[49%]">
-                      <input 
-                        type="email" 
-                        name="email" 
-                        placeholder="Email" 
-                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black" 
-                      />
-                      <input 
-                        type="password" 
-                        name="password" 
-                        placeholder="Password" 
-                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black" 
-                      />
-                      <input 
-                        type="password" 
-                        name="password" 
-                        placeholder="Konfirmasi Password" 
-                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black" 
+                      <input
+                        type="email"
+                        name="email"
+                        value={inputEmail}
+                        onChange={(e) => setInputEmail(e.target.value)}
+                        placeholder="Email"
+                        className="text-sm border rounded w-full py-2 px-3 text-black-700 opacity-90 mb-6 bg-none border-black"
                       />
                       <div className="border border-black rounded-md bg-transparent">
                         <p className="text-base p-2">
@@ -118,261 +237,130 @@ const DetailPembayaran = () => {
                         </p>
                       </div>
                       <Button
-                        classname="w-full text-base font-normal text-white my-5 bg-blue-500">
-                        Simpan
+                        type="submit"
+                        classname="w-full text-base font-normal text-white my-5 bg-blue-500"
+                      >
+                        Edit Profile
                       </Button>
+                      <SimpleModal
+                        isOpen={isModalOpen}
+                        image="/images/icons/success-icon.png"
+                        message="Profile updated successfully."
+                        buttonText="Close"
+                        onClose={handleCloseModal}
+                      />
                     </div>
                   </div>
                 </form>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg p-5 mt-10">
+            <div className="bg-white rounded-lg p-5 mt-6">
               <div>
-                <h3 className="font-semibold text-2xl m-2">
-                  Metode Pembayaran
-                </h3>
+                <h3 className="font-semibold text-2xl m-2">Detail Pembayaran</h3>
               </div>
-              <div className="border border-black rounded-md mb-4 p-4">
-                <div className="cursor-pointer" onClick={toggleDropdown}>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <img
-                        src="images/icons/virtual-account.png"
-                        alt="Virtual Account"
-                        className="w-16 mr-4 border rounded-lg"
-                      />
-                      <div>
-                        <h3 className="text-lg font-semibold">
-                          Transfer Virtual Account
-                        </h3>
-                        <div className="flex space-x-2 mt-1">
-                          <img src="images/icons/bca-payment.png" alt="BCA" />
-                          <img src="images/icons/bni-payment.png" alt="BNI" />
-                          <img
-                            src="images/icons/mandiri-payment.png"
-                            alt="Mandiri"
-                          />
-                        </div>
-                      </div>
-                    </div>
+              <div className="border-t-2 border-dashed border-black m-2"></div>
+              <div className="py-1">
+                <p className="font-semibold text-lg">Metode Pembayaran</p>
+                <div className="relative inline-block w-full text-gray-700">
+                  <select
+                    value={selectedOption}
+                    onChange={(e) => handleOptionChange(e.target.value)}
+                    className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                  >
+                    <option value="">Pilih Metode Pembayaran</option>
+                    <option value="bca">BCA Virtual Account</option>
+                    <option value="bni">BNI Virtual Account</option>
+                    <option value="mandiri">Mandiri Virtual Account</option>
+                    <option value="gopay">GoPay</option>
+                    <option value="dana">DANA</option>
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg
-                      className={`w-6 h-6 transform ${
-                        isDropdownOpen ? "rotate-180" : ""
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                      className="fill-current h-4 w-4"
                       xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
+                      <path d="M7 10l5 5 5-5z" />
                     </svg>
                   </div>
                 </div>
-
-                {isDropdownOpen && (
-                  <div className="mt-4">
-                    <label
-                      className={`flex items-center justify-between cursor-pointer mb-2 ${
-                        selectedOption === "bca" ? "bg-gray-100" : ""
-                      }`}
-                      onClick={() => handleOptionChange("bca")}
-                    >
-                      <div className="flex items-center">
-                        <img
-                          src="images/icons/bca-payment.png"
-                          alt="BCA"
-                          className="w-16 mr-4"
-                        />
-                        <div>
-                          <h3 className="text-lg font-semibold">BCA</h3>
-                          <p className="text-sm text-gray-500">
-                            Virtual Account
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <span className="mr-2">Rp 2.500</span>
-                        <input
-                          type="radio"
-                          name="payment"
-                          checked={selectedOption === "bca"}
-                          onChange={(e) => {
-                            e.stopPropagation();
-                            handleOptionChange("bca");
-                          }}
-                          className="form-radio text-blue-600"
-                        />
-                      </div>
-                    </label>
-                    <label
-                      className={`flex items-center justify-between cursor-pointer mb-2 ${
-                        selectedOption === "bni" ? "bg-gray-100" : ""
-                      }`}
-                      onClick={() => handleOptionChange("bni")}
-                    >
-                      <div className="flex items-center">
-                        <img
-                          src="images/icons/bni-payment.png"
-                          alt="BNI"
-                          className="w-16 mr-4"
-                        />
-                        <div>
-                          <h3 className="text-lg font-semibold">BNI</h3>
-                          <p className="text-sm text-gray-500">
-                            Virtual Account
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <span className="mr-2">Rp 2.500</span>
-                        <input
-                          type="radio"
-                          name="payment"
-                          checked={selectedOption === "bni"}
-                          onChange={(e) => {
-                            e.stopPropagation();
-                            handleOptionChange("bni");
-                          }}
-                          className="form-radio text-blue-600"
-                        />
-                      </div>
-                    </label>
-                    <label
-                      className={`flex items-center justify-between cursor-pointer mb-2 ${
-                        selectedOption === "mandiri" ? "bg-gray-100" : ""
-                      }`}
-                      onClick={() => handleOptionChange("mandiri")}
-                    >
-                      <div className="flex items-center">
-                        <img
-                          src="images/icons/mandiri-payment.png"
-                          alt="Mandiri"
-                          className="w-16 mr-4"
-                        />
-                        <div>
-                          <h3 className="text-lg font-semibold">Mandiri</h3>
-                          <p className="text-sm text-gray-500">
-                            Virtual Account
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <span className="mr-2">Rp 2.500</span>
-                        <input
-                          type="radio"
-                          name="payment"
-                          checked={selectedOption === "mandiri"}
-                          onChange={(e) => {
-                            e.stopPropagation();
-                            handleOptionChange("mandiri");
-                          }}
-                          className="form-radio text-blue-600"
-                        />
-                      </div>
-                    </label>
-                  </div>
+                <Button
+                  type="button"
+                  classname="w-full text-base font-normal text-white my-5 bg-blue-500"
+                  onClick={handlePayment}
+                >
+                  Lakukan Pembayaran
+                </Button>
+                {isModalVisible && (
+                  <Modal
+                    type={modalType}
+                    message={
+                      modalType === "success"
+                        ? "Pembayaran berhasil dilakukan!"
+                        : "Terjadi kesalahan saat melakukan pembayaran."
+                    }
+                    onClose={closeModal}
+                  />
                 )}
               </div>
-
-              <label
-                className={`border border-black rounded-md mb-4 p-4 flex items-center justify-between ${
-                  selectedOption === "gopay" ? "bg-gray-100" : ""
-                }`}
-              >
-                <div className="flex items-center">
-                  <img
-                    src="images/icons/gopay-payment.png"
-                    alt="GoPay"
-                    className="w-16 mr-4"
-                  />
-                  <h3 className="text-lg font-semibold">GoPay</h3>
-                </div>
-                <div className="flex items-center">
-                  <span className="mr-2">Rp 2.500</span>
-                  <input
-                    type="radio"
-                    name="payment"
-                    checked={selectedOption === "gopay"}
-                    onChange={() => handleOptionChange("gopay")}
-                    className="form-radio text-blue-600"
-                  />
-                </div>
-              </label>
-              <label
-                className={`border border-black rounded-md mb-4 p-4 flex items-center justify-between ${
-                  selectedOption === "dana" ? "bg-gray-100" : ""
-                }`}
-              >
-                <div className="flex items-center">
-                  <img
-                    src="images/icons/dana-payment.png"
-                    alt="Dana"
-                    className="w-16 mr-4"
-                  />
-                  <h3 className="text-lg font-semibold">Dana</h3>
-                </div>
-                <div className="flex items-center">
-                  <span className="mr-2">Rp 2.500</span>
-                  <input
-                    type="radio"
-                    name="payment"
-                    checked={selectedOption === "dana"}
-                    onChange={() => handleOptionChange("dana")}
-                    className="form-radio text-blue-600"
-                  />
-                </div>
-              </label>
             </div>
           </div>
 
-          <div className="w-[32%]">
-            <div className="bg-white rounded-lg p-4">
-              <div>
-                <h3 className="font-semibold text-2xl m-2">Rincian Biaya</h3>
-              </div>
+          <div className="w-3/12">
+            <div className="bg-white rounded-lg p-5">
+              <h3 className="font-semibold text-2xl">Data Lapangan</h3>
               <div className="border-t-2 border-dashed border-black m-2"></div>
-              <div className="py-4">
-                <div className="flex flex-wrap justify-between">
-                  <p className="text-base m-2">Biaya Sewa</p>
-                  <p className="text-base m-2">Rp. 100.000</p>
+              <div className="py-1">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-700 font-semibold">Jam Main</p>
+                    <p className="text-gray-500">08:00 - 09:00 WIB</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-700 font-semibold">Harga</p>
+                    <p className="text-gray-500">Rp. {hargaLapangan}</p>
+                  </div>
                 </div>
-                <div className="flex flex-wrap justify-between">
-                  <p className="text-base m-2">Biaya Produk Tambahan</p>
-                  <p className="text-base m-2">Rp. 0</p>
+                <div className="border-t-2 border-dashed border-black m-2"></div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-700 font-semibold">Lama Sewa</p>
+                    <p className="text-gray-500">1 Jam</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-700 font-semibold">Total</p>
+                    <p className="text-gray-500">Rp. {hargaLapangan + 2500}</p>
+                  </div>
                 </div>
-                <div className="flex flex-wrap justify-between">
-                  <p className="text-base m-2">Biaya Admin</p>
-                  <p className="text-base m-2">Rp. 2.500</p>
-                </div>
-              </div>
-              <div className="border-t-2 border-dashed border-black m-2"></div>
-              <div>
-                <div className="flex flex-wrap justify-between">
-                  <p className="text-base m-2">Total</p>
-                  <p className="text-base m-2">Rp. 102.500</p>
+                <div className="border-t-2 border-dashed border-black m-2"></div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-700 font-semibold">Lokasi</p>
+                    <p className="text-gray-500">Lapangan A</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-700 font-semibold">Tanggal</p>
+                    <p className="text-gray-500">25 Juni 2024</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="w-full">
-              <Button
-                onClick={openModal("membayar")}
-                classname="w-full text-base font-normal text-white my-5 bg-blue-500"
-              >
-                Lakukan Pembayaran
-              </Button>
+
+            <div className="bg-white rounded-lg p-5 mt-6">
+              <h3 className="font-semibold text-2xl">Informasi</h3>
+              <div className="border-t-2 border-dashed border-black m-2"></div>
+              <div className="py-1">
+                <p className="text-gray-700 font-semibold">
+                  Silakan lakukan pembayaran dalam waktu 1 jam setelah
+                  pemesanan. Jika tidak, pemesanan akan otomatis dibatalkan.
+                </p>
+                <p className="text-gray-500 mt-3">
+                  Untuk pertanyaan lebih lanjut, hubungi kami di support@lapangan.com
+                </p>
+              </div>
             </div>
           </div>
-          <Modal
-            isVisible={isModalVisible}
-            onClose={closeModal}
-            type={modalType}
-          />
         </div>
       </div>
       {/* Body End */}

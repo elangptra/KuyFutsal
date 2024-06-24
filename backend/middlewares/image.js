@@ -1,18 +1,20 @@
-// unggah.js
-import multer from "multer";
-import path from "path";
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Konfigurasi penyimpanan
+// Mendefinisikan __filename dan __dirname untuk ES6
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'frontend/public/images/profile'); // Sesuaikan dengan lokasi penyimpanan gambar
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../../frontend/public/images/profile')); // Pastikan path ke folder penyimpanan sudah benar
   },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Menambahkan timestamp ke nama file
-  }
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
 });
 
-// Filter jenis file
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -24,7 +26,6 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Konfigurasi multer
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
